@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Multi-run simulations in LWFBrook90R</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Multi-run simulations in LWFBrook90R</h1>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#data-management-i-output_fun-argument">Data management (i): <code>output_fun</code>-argument</a></li>
+<li><a href="#multi-run-simulations-with-run_multi_lwfb90">Multi-run simulations with <code>run_multi_LWFB90()</code></a></li>
+<li><a href="#multi-site-simulations-using-run_multisite_lwfb90">Multi-Site simulations using <code>run_multisite_LWFB90()</code></a></li>
+<li><a href="#data-management-ii-a-function-as-climate-argument">Data management (ii): A function as <code>climate</code>-argument</a></li>
+<li><a href="#multi-site-simulation-input-from-file-output-to-file">Multi-site simulation: Input from file, output to file</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>With ‘LWFBrook90R,’ parallelized multi-run simulations can be performed conveniently, extending the basic single-run applications using the function <code>run_LWFB90()</code> described in the introductory vignette. Two different multi-run functions exist for two different problems:</p>
+<ol style="list-style-type: decimal">
+<li>Perform Monte-Carlo simulations with single parameters set up for variation, and</li>
+<li>simulations over multiple locations, parameter sets, or climate scenarios.</li>
+</ol>
+<p>For the first case, the function <code>run_multi_LWFB90()</code> is available. The second problem can be tackled using the function <code>run_multisite_LWFB90()</code>.</p>
+<p>Both functions are wrapper functions for <code>run_LWFB90()</code> and allow for parallel processing of tasks, using a specified number of CPUs to speed up the execution of a multi-run simulation. They return large lists containing the individual single run simulation results, as they are returned by <code>run_LWFB90()</code>. These result-lists can become very large if many simulations are performed, and the selected output comprises daily data sets and especially the individual soil layers’ daily soil moisture states. Huge amounts of data produced can overload the memory, I therefore start this vignette with a section on how to make best use of the <code>output_fun</code>-argument of <code>run_LWFB90()</code> for output data management.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(LWFBrook90R)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span></code></pre></div>
+</div>
+<div id="data-management-i-output_fun-argument" class="section level2">
+<h2>Data management (i): <code>output_fun</code>-argument</h2>
+<p>To minimize memory allocation, it is recommended to reduce the selected output to a minimum and make use of the <code>output_fun</code>-argument of <code>run_LWFB90()</code>. With this argument, it is possible to pass custom functions to <code>run_LWFB90()</code>, which directly perform on the simulation output list object. With <code>rtrn_output = FALSE</code>, the original simulation output (as selected by <code>output</code>) then can be discarded, and only the results from the <code>output_fun</code>-argument are returned. This can be very useful for model calibration or sensitivity analyses tasks comprising ten thousands of simulations in a Monte-Carlo setting. With this magnitude, memory allocation is critical, and only a relatively small output can be returned for each individual simulation (e.g., a measure of agreement between simulated and observed values). Similarly, it is possible to define functions for custom output aggregation, to redirect the simulation output to a file or database, as we will see later.</p>
+<p>To demonstrate the usage of the <code>output_fun</code>-argument, we perform a Monte-Carlo simulation using the function <code>run_multi_LWFB90()</code>, and define a function that returns annual mean soil water storage and transpiration during the growing season. In a first step, the function integrates depth-specific soil moisture to soil water storage down to specified soil layer (<code>tolayer</code>), and in a second step calculates mean soil water storage over the growing season, along with the sum of transpiration. The growing season thereby is defined by the input parameters <code>budburstdoy</code> and <code>leaffalldoy</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>output_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, tolayer) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aggregate SWAT</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  swat_tran <span class="ot">&lt;-</span> x<span class="sc">$</span>SWATDAY.ASC[<span class="fu">which</span>(nl <span class="sc">&lt;=</span> tolayer), </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">list</span>(<span class="at">swat =</span> <span class="fu">sum</span>(swati)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                             by  <span class="ot">=</span> <span class="fu">list</span>(yr, doy)]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#add transpiration from EVAPDAY.ASC</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  swat_tran<span class="sc">$</span>tran <span class="ot">&lt;-</span> x<span class="sc">$</span>EVAPDAY.ASC<span class="sc">$</span>tran</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get beginning and end of growing season from input parameters</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  vpstart <span class="ot">&lt;-</span> x<span class="sc">$</span>model_input<span class="sc">$</span>param_b90<span class="sc">$</span>budburstdoy</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  vpend <span class="ot">&lt;-</span> x<span class="sc">$</span>model_input<span class="sc">$</span>param_b90<span class="sc">$</span>leaffalldoy</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  swat_tran <span class="ot">&lt;-</span> <span class="fu">merge</span>(swat_tran,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">data.frame</span>(<span class="at">yr =</span> <span class="fu">unique</span>(swat_tran<span class="sc">$</span>yr),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                vpstart, vpend), <span class="at">by =</span> <span class="st">&quot;yr&quot;</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mean swat and tran sum</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  swat_tran[doy <span class="sc">&gt;=</span> vpstart <span class="sc">&amp;</span> doy <span class="sc">&lt;=</span> vpend, </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">list</span>(<span class="at">swat_vp_mean =</span> <span class="fu">mean</span>(swat), <span class="at">tran_vp_sum =</span> <span class="fu">sum</span>(tran)), by <span class="ot">=</span> yr]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>To test our custom output function we run a single-run simulation</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;slb1_meteo&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;slb1_soil&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>soil <span class="ot">&lt;-</span> <span class="fu">cbind</span>(slb1_soil, <span class="fu">hydpar_wessolek_tab</span>(<span class="at">texture =</span> slb1_soil<span class="sc">$</span>texture))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>b90res <span class="ot">&lt;-</span> <span class="fu">run_LWFB90</span>(<span class="at">options_b90 =</span> <span class="fu">set_optionsLWFB90</span>(),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">param_b90 =</span> <span class="fu">set_paramLWFB90</span>(),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">climate =</span> slb1_meteo,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">soil =</span> soil,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">output =</span> <span class="fu">set_outputLWFB90</span>())</span></code></pre></div>
+<p>and apply the function to the return, to see that our custom output function works:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output_function</span>(b90res, <span class="at">tolayer =</span> <span class="dv">15</span>)</span></code></pre></div>
+</div>
+<div id="multi-run-simulations-with-run_multi_lwfb90" class="section level2">
+<h2>Multi-run simulations with <code>run_multi_LWFB90()</code></h2>
+<p>As mentioned, <code>run_multi_LWFB90()</code> is a wrapper for <code>run_LWFB90()</code>. <code>run_multi_LWFB90()</code> takes a data.frame <code>paramvar</code> containing variable parameter values in columns and their realizations in rows. For each row in <code>paramvar</code>, the respective parameter values in <code>param_b90</code> are replaced by name, and <code>run_LWFB90()</code> is called. Further arguments to <code>run_LWFB90()</code> have to be specified and are passed on.</p>
+<p>For the multi-run simulation, we set up two parameters for variation, the maximum leaf area index (<code>maxlai</code>) and the maximum leaf conductance (<code>glmax</code>). We define a data.frame with two columns, containing 50 random uniform realizations of the two parameters:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">50</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>paramvar <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">maxlai =</span> <span class="fu">runif</span>(N, <span class="dv">4</span>,<span class="dv">7</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">glmax =</span> <span class="fu">runif</span>(N,<span class="fl">0.003</span>, <span class="fl">0.01</span>))</span></code></pre></div>
+<p>Now we can run the simulation. We suppress the selected simulation result objects and model input from being returned, and only return the values from our <code>output_fun</code> defined above. We pass <code>tolayer = 15</code> so that soil water storage is integrated down to the 15th soil layer, corresponding to 0-100 cm soil depth. Note that the <code>param_b90</code> object (and thus parameters <code>budburstdoy</code> and <code>leaffalldoy</code>) is available to our <code>output_fun</code>, although it is not included in the return (<code>rtrn_input = FALSE</code>).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mrun_res <span class="ot">&lt;-</span> <span class="fu">run_multi_LWFB90</span>(<span class="at">paramvar =</span> paramvar,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">param_b90 =</span> <span class="fu">set_paramLWFB90</span>(),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">cores =</span> <span class="dv">5</span>, <span class="co"># arguments below are passed to run_LWFB90()</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">options_b90 =</span> <span class="fu">set_optionsLWFB90</span>(), </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">climate =</span> slb1_meteo,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">soil =</span> soil,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">output =</span> <span class="fu">set_outputLWFB90</span>(), </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">rtrn_input =</span> <span class="cn">FALSE</span>, <span class="at">rtrn_output =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">output_fun =</span> output_function,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tolayer =</span> <span class="dv">15</span>) <span class="co"># argument to output_fun</span></span></code></pre></div>
+<p>The result is a list of the individual single-run results, from which we can easily extract the results of our output function and <code>rbindlist</code> them together in a data.table:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mrun_dt <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(mrun_res, <span class="cf">function</span>(x) x<span class="sc">$</span>output_fun[[<span class="dv">1</span>]]), </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">idcol =</span> <span class="st">&quot;singlerun&quot;</span>)</span></code></pre></div>
+<p>Now we can display the results of the 50 simulations using boxplots:</p>
+<p>We ran 50 simulations, all with the same climate, soil, and parameters except for <code>maxlai</code> and <code>glmax</code>, that where varied randomly. In the next section we will learn how to make use of multiple climate, soil, and parameter sets using the function <code>run_multisite_LWFB90()</code>.</p>
+</div>
+<div id="multi-site-simulations-using-run_multisite_lwfb90" class="section level2">
+<h2>Multi-Site simulations using <code>run_multisite_LWFB90()</code></h2>
+<p>A basic multi-site simulation with the function <code>run_multisite_LWFB90()</code> runs through lists of <code>param_b90</code>, <code>climate</code>, and <code>soil</code>-objects, and evaluates the specified parameter sets for each of the soil/climate combinations. To demonstrate its usage, we define two parameter sets, that we want to run on three ‘sites.’ We include the two parameter sets in a list <code>parms_l</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>parms_beech <span class="ot">&lt;-</span> <span class="fu">set_paramLWFB90</span>(<span class="at">maxlai =</span> <span class="dv">6</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>parms_spruce <span class="ot">&lt;-</span> <span class="fu">set_paramLWFB90</span>(<span class="at">maxlai =</span> <span class="fl">4.5</span>, <span class="at">winlaifrac =</span> <span class="fl">0.8</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>parms_l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">beech =</span> parms_beech, <span class="at">spruce =</span> parms_spruce)</span></code></pre></div>
+<p>We pretend that the three sites all have individual climates and soils, and set up lists for soil and climate input:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>soils_l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">soil1 =</span> soil, <span class="at">soil2 =</span> soil, <span class="at">soil3 =</span> soil)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>climates_l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">clim1 =</span> slb1_meteo, <span class="at">clim2 =</span> slb1_meteo, <span class="at">clim3 =</span> slb1_meteo)</span></code></pre></div>
+<p>Now we can run a small example:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>msite_run1 <span class="ot">&lt;-</span> <span class="fu">run_multisite_LWFB90</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">options_b90 =</span> <span class="fu">set_optionsLWFB90</span>(<span class="at">startdate =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2002-06-01&quot;</span>), </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">enddate =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2002-06-30&quot;</span>)),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">param_b90 =</span> parms_l,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">climate =</span> climates_l,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">soil =</span> soils_l,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">3</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(msite_run1, <span class="at">max.level =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>The results are returned as a list of single run objects, with their names being concatenated from the names of the input list entries holding the individual <code>param_b90</code>, <code>climate</code>, and <code>soil</code> input objects.</p>
+</div>
+<div id="data-management-ii-a-function-as-climate-argument" class="section level2">
+<h2>Data management (ii): A function as <code>climate</code>-argument</h2>
+<p>The function <code>run_multisite_LWFB90()</code> can easily be set up to run a few dozens of sites with individual climate data. However, simulating thousands of sites potentially is impossible, because such a large list of <code>climate</code> data.frames might overload the memory of a usual desktop computer. Fortunately, it is possible to pass a function instead of a data.frame as <code>climate</code>-argument to <code>run_LWFB90()</code>. Such a function can be used to create the <code>climate</code>-data.frame from a file or database-connection within <code>run_LWFB90()</code> or <code>run_multisite_LWFB90()</code> on the fly. For <code>run_LWFB90()</code>, we can simply provide arguments to the function via the <code>...</code>-placeholder. For <code>run_multisite_LWFB90()</code>, we need to pass arguments to a <code>climate</code>-function (possibly with individual values for individual site, e.g. a file name) via the <code>climate_args</code>-argument.</p>
+<p>To demonstrate this mechanism, we write three files with climatic data to a temporary location, from where we will read them back in later:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tdir <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fnames <span class="ot">&lt;-</span> <span class="fu">paste0</span>(tdir, <span class="st">&quot;/clim&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;.csv&quot;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(slb1_meteo[<span class="fu">year</span>(slb1_meteo<span class="sc">$</span>dates) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2002</span>,<span class="dv">2003</span>),], </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> fnames[<span class="dv">1</span>], <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(slb1_meteo[<span class="fu">year</span>(slb1_meteo<span class="sc">$</span>dates) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2002</span>,<span class="dv">2003</span>),], </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> fnames[<span class="dv">2</span>], <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(slb1_meteo[<span class="fu">year</span>(slb1_meteo<span class="sc">$</span>dates) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2002</span>,<span class="dv">2003</span>),], </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> fnames[<span class="dv">3</span>], <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>For testing, we perform a single run with <code>runLWFB90()</code> and use the <code>fread</code> function from the ‘data.table’-package as <code>climate</code>-argument. The function reads ‘csv’-files, and takes a <code>file</code> name as argument that we include in the call. It points to the first of our three climate files:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>srun <span class="ot">&lt;-</span> <span class="fu">run_LWFB90</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">options_b90 =</span> <span class="fu">set_optionsLWFB90</span>(),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">param_b90 =</span> <span class="fu">set_paramLWFB90</span>(),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">soil =</span> soil,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">output =</span> <span class="fu">set_outputLWFB90</span>(),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">climate =</span> fread,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> fnames[<span class="dv">1</span>],</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">rtrn.input =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>The same construct basically works with the function <code>run_multisite_LWFB90()</code>. The only difference to single-run simulations is that the arguments for the function have to be specified in a named list of lists, one sub-list for each site. We set it up as follows:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>clim_args <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">climfromfile1 =</span> <span class="fu">list</span>(<span class="at">file =</span> fnames[<span class="dv">1</span>]),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">climfromfile2 =</span> <span class="fu">list</span>(<span class="at">file =</span> fnames[<span class="dv">2</span>]),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">climfromfile3 =</span> <span class="fu">list</span>(<span class="at">file =</span> fnames[<span class="dv">3</span>]))</span></code></pre></div>
+<p>Now we call <code>run_multisite_LWFB90()</code>, and set up the function <code>fread</code> as <code>climate</code>-object. Our list of lists with individual arguments for <code>fread</code> is passed to the function via <code>climate_args</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>msite_run2 <span class="ot">&lt;-</span> <span class="fu">run_multisite_LWFB90</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">options_b90 =</span> <span class="fu">set_optionsLWFB90</span>(),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">param_b90 =</span> parms_l,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">soil =</span> soils_l,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">climate =</span> fread,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">climate_args =</span> clim_args,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">3</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(msite_run2, <span class="at">max.level =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>We simulated two parameter sets using three different climate/soil combinations. The names of the climate used in the result names are now coming from the top-level names of our list <code>clim_args</code>, because we used a function as <code>climate</code>-argument. The function <code>fread</code> is evaluated directly within <code>run_multisite_LWFB90()</code>, and is not passed to <code>run_LWFB90()</code>, because otherwise it would have been evaluated for each single-run simulation. In this way, <code>fread</code> is evaluated only three times for in total six simulations which saves us some execution time, if we want to simulate multiple parameter sets using the same climatic data.</p>
+</div>
+<div id="multi-site-simulation-input-from-file-output-to-file" class="section level2">
+<h2>Multi-site simulation: Input from file, output to file</h2>
+<p>Now that we learned how to use a function as climate input, we can combine this input facility with an <code>output_fun</code> that writes the simulation results to a file. To do so, we extend our output function from the first example so that it writes the results to a file in a specified directory. The file name is constructed from the names of the current soil, climate, and parameter object, which are passed automatically from <code>run_multisite_LWFB90()</code> to <code>run_LWFB90()</code> as character variables <code>soil_nm</code>, <code>clim_nm</code>, and <code>param_nm</code>. In this way, the names of currently processed input objects are accessible to <code>output_fun</code>-functions within <code>run_LWFB90()</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>output_function2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, tolayer, <span class="at">basedir =</span> <span class="fu">getwd</span>(),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                            soil_nm, clim_nm, param_nm ) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># file-name</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  filenm <span class="ot">=</span> <span class="fu">file.path</span>(basedir, <span class="fu">paste</span>(soil_nm, clim_nm, param_nm, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aggregate SWAT</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  swat_tran <span class="ot">&lt;-</span> x<span class="sc">$</span>SWATDAY.ASC[<span class="fu">which</span>(nl <span class="sc">&lt;=</span> tolayer), </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">list</span>(<span class="at">swat =</span> <span class="fu">sum</span>(swati)),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                             by  <span class="ot">=</span> <span class="fu">list</span>(yr, doy)]</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#add transpiration from EVAPDAY.ASC</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  swat_tran<span class="sc">$</span>tran <span class="ot">&lt;-</span> x<span class="sc">$</span>EVAPDAY.ASC<span class="sc">$</span>tran</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get beginning and end of growing season from input parameters</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  vpstart <span class="ot">&lt;-</span> x<span class="sc">$</span>model_input<span class="sc">$</span>param_b90<span class="sc">$</span>budburstdoy</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  vpend <span class="ot">&lt;-</span> x<span class="sc">$</span>model_input<span class="sc">$</span>param_b90<span class="sc">$</span>leaffalldoy</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  swat_tran <span class="ot">&lt;-</span> <span class="fu">merge</span>(swat_tran,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">data.frame</span>(<span class="at">yr =</span> <span class="fu">unique</span>(swat_tran<span class="sc">$</span>yr),</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>                                vpstart, vpend), <span class="at">by =</span> <span class="st">&quot;yr&quot;</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mean swat and tran sum</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  swattran_vp <span class="ot">&lt;-</span> swat_tran[doy <span class="sc">&gt;=</span> vpstart <span class="sc">&amp;</span> doy <span class="sc">&lt;=</span> vpend, </span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">list</span>(<span class="at">swat_vp_mean =</span> <span class="fu">mean</span>(swat), <span class="at">tran_vp_sum =</span> <span class="fu">sum</span>(tran)), by <span class="ot">=</span> yr]</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(swattran_vp, <span class="at">file =</span> <span class="fu">paste0</span>(filenm, <span class="st">&quot;.csv&quot;</span>))</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Now we can run the simulations, with climate data coming from files, and the results being written to file our temporary directory <code>tdir</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>msite_run3 <span class="ot">&lt;-</span> <span class="fu">run_multisite_LWFB90</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">options_b90 =</span> <span class="fu">set_optionsLWFB90</span>(),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">param_b90 =</span> parms_l,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">soil =</span> soils_l,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">climate =</span> fread,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">climate_args =</span> clim_args,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">output =</span> <span class="fu">set_outputLWFB90</span>(),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">rtrn_input =</span> <span class="cn">FALSE</span>, <span class="at">rtrn_output =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_fun =</span> output_function2,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">tolayer =</span> <span class="dv">15</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">basedir =</span> tdir,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p>After the simulation has finished, we can list the files and see that our attempt was successful:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(tdir, <span class="at">pattern =</span> <span class="st">&quot;csv&quot;</span>)</span></code></pre></div>
+<p>Note that we can also use database connections objects instead of files to read climate data and save simulation results. For the input of climate data, connection objects can be defined in advance, and passed directly to the <code>climate</code>-function. However, this does not work for <code>output_fun</code> in a parallel setting like in <code>run_multisite_LWFB90()</code> or <code>run_multi_LWFB90()</code>, because file or database connections in R are not exported to parallel workers. Connections therefore have to be set up (and closed again) within an <code>output_fun</code>-function.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
