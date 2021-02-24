@@ -1,5 +1,9 @@
 # News for the LWFBrook90R-package
 
+## Version 0.4.4. (2021-02-24)
+
+- Fixed LTO installation warning on Fedora Linux
+
 ## Version 0.4.3 (2021-02-09)
 
 - Minor changes to fulfill CRAN publication requirements
