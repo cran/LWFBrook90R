@@ -57,7 +57,7 @@ b90res <- LWFBrook90R:::b90res
 ## -----------------------------------------------------------------------------
 #  mrun_res <- run_multi_LWFB90(paramvar = paramvar,
 #                               param_b90 = set_paramLWFB90(),
-#                               cores = 5, # arguments below are passed to run_LWFB90()
+#                               cores = 2, # arguments below are passed to run_LWFB90()
 #                               options_b90 = set_optionsLWFB90(),
 #                               climate = slb1_meteo,
 #                               soil = soil,
@@ -96,7 +96,7 @@ mrun_dt <- LWFBrook90R:::mrun_dt
 #    param_b90 = parms_l,
 #    climate = climates_l,
 #    soil = soils_l,
-#    cores = 3)
+#    cores = 2)
 #  str(msite_run1, max.level = 1)
 
 ## -----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ mrun_dt <- LWFBrook90R:::mrun_dt
 #    soil = soils_l,
 #    climate = fread,
 #    climate_args = clim_args,
-#    cores = 3)
+#    cores = 2)
 #  
 #  str(msite_run2, max.level = 1)
 
@@ -173,7 +173,7 @@ mrun_dt <- LWFBrook90R:::mrun_dt
 #    output_fun = output_function2,
 #    tolayer = 15,
 #    basedir = tdir,
-#    cores = 3)
+#    cores = 2)
 
 ## -----------------------------------------------------------------------------
 #  list.files(tdir, pattern = "csv")

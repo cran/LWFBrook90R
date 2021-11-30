@@ -1,5 +1,18 @@
 # News for the LWFBrook90R-package
 
+# Version 0.4.5 (2021-11-30)
+
+Bug fixes:
+
+- `make_rootden()` with `method = 'betamodel'` led to negative 
+root density of the top layer when specified `maxrootdepth` was lower than soil depth.
+- no more errors when using sub-daily precipitation input
+- typo in `hydpar_wessolek_tab()` caused NAs in return for `texture = 'fSms'`
+- `soil_to_param()`: some unique soil materials were omitted in the return, if they had multiple occurences in the input `soil`-data.frame.
+
+Changes: 
+- new daily output variables: daily solar (`slrad`), net solar (`solnet`), net longwave (`lngnet`) and net radiation above (`aa`) and below canopy (`asubs`).
+
 ## Version 0.4.4. (2021-02-24)
 
 - Fixed LTO installation warning on Fedora Linux

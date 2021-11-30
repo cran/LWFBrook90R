@@ -41,7 +41,7 @@
 #' @param run Logical: run LWF-Brook90 or only return model input objects?
 #'   Useful to inspect the effects of options and parameters on model input.
 #'   Default is TRUE.
-#' @param timelimit Integer to set elapsed time limits for running LWF-Brook90.
+#' @param timelimit Integer to set elapsed time limits (seconds) for running LWF-Brook90.
 #' @param verbose Logical: print messages to the console? Default is FALSE.
 #' @param ... Additional arguments passed to \code{output_fun} and/or
 #'   \code{climate}, if the latter is a function.
@@ -76,7 +76,9 @@
 #' mo \tab month \tab - \cr
 #' da \tab day of month \tab - \cr
 #' doy \tab day of year \tab - \cr
+#' aa \tab average available energy above canopy \tab W/m2 \cr
 #' adef \tab available water deficit in root zone \tab mm \cr
+#' asubs \tab average available energy below canopy \tab W/m2 \cr
 #' awat \tab total available soil water in layers with roots between -6.18 kPa and \code{param_b90$psicr} \tab mm \cr
 #' balerr \tab error in water balance \tab mm \cr
 #' byfl \tab total bypass flow \tab mm \cr
@@ -89,6 +91,7 @@
 #' ints \tab intercepted snow at the end of the time interval \tab mm \cr
 #' irvp \tab evaporation of intercepted rain \tab mm \cr
 #' isvp \tab evaporation of intercepted snow \tab mm \cr
+#' lngnet \tab net longwave radiation \tab W/m2 \cr
 #' nits \tab total number of iterations in time interval \tab - \cr
 #' pint \tab potential interception for a canopy always wet \tab mm \cr
 #' pslvp \tab potential soil evaporation \tab mm \cr
@@ -105,6 +108,8 @@
 #' sint \tab snow interception \tab mm \cr
 #' slfl \tab input to soil surface \tab mm \cr
 #' slvp \tab evaporation rate from soil \tab mm \cr
+#' slrad \tab average solar radiation on slope over daytime \tab W/m2 \cr
+#' solnet \tab net solar radiation on slope over daytime \tab W/m2 \cr
 #' smlt \tab snowmelt \tab mm \cr
 #' snow \tab snowpack water equivalent \tab mm \cr
 #' snvp \tab evaporation from snowpack \tab mm \cr
@@ -224,10 +229,17 @@ run_LWFB90 <- function(options_b90,
   # constrain data to simulation period
   climate <- climate[which(climate$dates >= options_b90$startdate
                            & climate$dates <= options_b90$enddate),]
+  if (!is.null(precip)){
+    precip <- precip[which(precip$dates >= options_b90$startdate
+                           & precip$dates <= options_b90$enddate),]
+  }
 
   ## Precipitation correction (Richter) ----
   if (options_b90$correct_prec == TRUE) {
-    climate$prec <- with(climate, correct_prec(month, tmean, prec,
+    if (!is.null(precip)) {
+      warning("Correction of precipitation not possible for sub-daily precipitation data! Doing nothing.")
+    }
+    climate$prec <- with(climate, correct_prec(mo, tmean, prec,
                                                station.exposure = param_b90$prec_corr_statexp))
   }
 
@@ -285,7 +297,7 @@ run_LWFB90 <- function(options_b90,
       climveg = cbind(climate[, c("yr", "mo", "da","globrad","tmax","tmin",
                                   "vappres","windspeed","prec","mesfl")],
                       standprop_daily[, c("densef", "height", "lai", "sai", "age")]),
-      precdat = precip,
+      precdat = precip[,c("yr", "mo", "da","ii","prec", "mesfl")],
       param = param_to_rlwfbrook90(param_b90, options_b90$imodel),
       pdur = param_b90$pdur,
       soil_materials = param_b90$soil_materials,
@@ -314,7 +326,8 @@ run_LWFB90 <- function(options_b90,
                            'rnet','smlt','snow','swat','gwat','intr', 'ints','evap','tran','irvp',
                            'isvp','slvp','snvp','pint','ptran','pslvp','flow','seep',
                            'srfl','slfl','byfl','dsfl','gwfl','vrfln','safrac',
-                           'stres','adef','awat','relawat','nits','balerr'))
+                           'stres','adef','awat','relawat','nits','balerr', 'slrad',
+                           'solnet', 'lngnet', 'aa', 'asubs'))
 
     # layer outputs
     simout$layer_output <- data.table::rbindlist(lapply(seq(dim(simout$layer_output)[3]),
@@ -520,9 +533,9 @@ chk_clim <- function() {
     # }
 
     if (any(!c("yr", "mo", "da") %in% names(climate))) {
-      climate$yr <- as.integer(format(climate$dates, "%Y"))
-      climate$mo <- as.integer(format(climate$dates, "%m"))
-      climate$da <- as.integer(format(climate$dates, "%d"))
+      climate$yr <- data.table::year(climate$dates)
+      climate$mo <- data.table::month(climate$dates)
+      climate$da <- data.table::mday(climate$dates)
     }
 
     if (!any( names(climate) == "mesfl") ) {
@@ -547,10 +560,9 @@ chk_clim <- function() {
           precip <- NULL
         } else {
           precip$ii <- rep(1:options_b90$prec_interval,nrow(climate))
-          precip$yr <- as.integer(format(precip$dates, "%Y"))
-          precip$mo <- as.integer(format(precip$dates, "%m"))
-          precip$da <- as.integer(format(precip$dates, "%d"))
-          precip <- precip[, c("yr","mo","da", "ii", "prec", "mesfl")]
+          precip$yr <- data.table::year(precip$dates)
+          precip$mo <- data.table::month(precip$dates)
+          precip$da <- data.table::mday(precip$dates)
           climate$prec <- -999
         }
       }
@@ -590,25 +602,47 @@ chk_soil <- function(){
       names(param_b90$soil_materials) <- tolower(names(param_b90$soil_materials))
 
       stopifnot(all(c( "upper", "lower", "mat") %in% names(param_b90$soil_nodes)))
+      if (anyNA(param_b90$soil_nodes[,c( "upper", "lower", "mat")])) {
+        stop("No NAs allowed in param_b90$soil_nodes")
+      }
+
       if (options_b90$imodel == "MvG" ) {
         stopifnot(all(c("mat","ths","thr","alpha","npar","ksat","tort","gravel") %in% names(param_b90$soil_materials)))
+        if (anyNA(param_b90$soil_materials[,c("mat","ths","thr","alpha","npar","ksat","tort","gravel")])) {
+          stop("No NAs allowed in param_b90$soil_materials!")
+        }
+
       } else {
         stopifnot(all(c("mat","thsat","thetaf","psif","bexp","kf","wetinf","gravel") %in% names(param_b90$soil_materials)))
+        if (anyNA(param_b90$soil_materials[,c("mat","thsat","thetaf","psif","bexp","kf","wetinf","gravel")])) {
+          stop("No NAs allowed in param_b90$soil_materials!")
+          }
       }
+
       if (options_b90$root_method == "soilvar" & is.null(param_b90$soil_nodes$rootden)) {
         stop("Please provide column 'rootden' in param_b90$soil_nodes when using options_b90$root_method = 'soilvar'.")
       }
+
+
     } else {
       names(soil) <- tolower(names(soil))
       if (options_b90$imodel == "MvG") {
         stopifnot(all(c("upper","lower", "ths","thr","alpha","npar","ksat","tort","gravel") %in% names(soil)))
+        if (anyNA(soil[,c("upper","lower","ths","thr","alpha","npar","ksat","tort","gravel")])) {
+          stop("No NAs allowed in 'soil'!")
+        }
       } else {
         stopifnot(all(c("upper","lower", "thsat","thetaf","psif","bexp","kf","wetinf","gravel") %in% names(soil)))
+        if (anyNA(soil[,c("upper","lower","thsat","thetaf","psif","bexp","kf","wetinf","gravel")])) {
+          stop("No NAs allowed in 'soil'!")
+        }
       }
 
       if (options_b90$root_method == "soilvar" & is.null(soil$rootden)) {
         stop("Please provide column 'rootden' in 'soil'-data.frame when using options_b90$root_method = 'soilvar'.")
       }
+
+
     }
   }))
 
