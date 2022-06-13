@@ -8,57 +8,8 @@ knitr::opts_chunk$set(
 library(LWFBrook90R)
 library(data.table)
 
-## -----------------------------------------------------------------------------
 options_b90 <- set_optionsLWFB90()
 param_b90 <- set_paramLWFB90()
-
-## -----------------------------------------------------------------------------
-soil <- cbind(slb1_soil, hydpar_wessolek_tab(texture = slb1_soil$texture))
-
-## -----------------------------------------------------------------------------
-output <- set_outputLWFB90()
-output
-
-## ---- eval = FALSE------------------------------------------------------------
-#  b90res <- run_LWFB90(options_b90 = options_b90,
-#                       param_b90 = param_b90,
-#                       climate = slb1_meteo,
-#                       soil = soil,
-#                       output = output)
-
-## ---- echo = FALSE------------------------------------------------------------
-b90res <- LWFBrook90R:::b90res
-
-## -----------------------------------------------------------------------------
-str(b90res, max.level = 1)
-
-## -----------------------------------------------------------------------------
-b90res$EVAPDAY.ASC[, dates := as.Date(paste(yr, mo, da, sep = "-"))]
-
-## -----------------------------------------------------------------------------
-b90res$SWATDAY.ASC[, dates := as.Date(paste(yr, mo, da, sep = "-"))]
-swat100cm <- b90res$SWATDAY.ASC[which(nl <= 15), list(swat100cm = sum(swati)),
-                                by  = dates]
-
-
-## ---- fig.height=5, fig.width=7, echo =FALSE, fig.cap="Simulation results for sample data"----
-oldpar <- par(no.readonly = T)
-par(mar=c(4.1,4.1,1.1,4.1), oma = c(1,1,1,1))
-plot(b90res$EVAPDAY.ASC$dates, 
-     b90res$EVAPDAY.ASC$tran, type ='l',
-     col = "green", ylab = "tran [mm]", xlab = "")
-par(new =TRUE)
-plot(swat100cm$dates,
-     swat100cm$swat100cm, 
-     ylim=c(100, 350), type ='l', col = "blue",
-     xaxt = "n", yaxt ="n", xlab= "", ylab = "")
-axis(4,pretty(c(100,350)))
-mtext("swat_100cm [mm]", side = 4, line =3)
-legend("bottom",inset = -0.25,
-       legend = c("tran", "swat100cm"),
-       col = c("green", "blue"),  lty = 1, 
-       bty = "n", xpd = TRUE,  horiz = TRUE,  text.width = 100)
-par(oldpar)
 
 ## -----------------------------------------------------------------------------
 LAI_b90 <-  make_seasLAI(method = options_b90$lai_method,
@@ -95,14 +46,15 @@ LAI_coupmodel <-  make_seasLAI(method = options_b90$lai_method,
                                shp_optdoy = param_b90$shp_optdoy)
 
 ## ---- echo = FALSE, fig.height=5, fig.width=7, fig.cap = "Methods featured by make_seasLAI()"----
+oldpar <- par(no.readonly = T)
 par(xpd = TRUE, mar = c(5.1,4.1,2.1,2.1), oma = c(1,1,1,1))
 
 plot(LAI_b90, type = "n", xlab = "doy", ylab = "lai [m²/m²]", ylim = c(0,6))
 with(param_b90, abline(v = c(budburstdoy,budburstdoy+emergedur,
                              leaffalldoy, leaffalldoy+leaffalldur), lty = 2, xpd = FALSE))
-lines(LAI_b90, col ="green",lwd = 2,)
-lines(LAI_linear, col ="red",lwd = 2)
-lines(LAI_coupmodel, col ="blue",lwd = 2)
+lines(LAI_b90, col ="green", lwd = 2)
+lines(LAI_linear, col ="red", lwd = 2)
+lines(LAI_coupmodel, col ="blue", lwd = 2)
 
 with(param_b90, arrows(x0 = c(budburstdoy,leaffalldoy,shp_optdoy,budburstdoy,leaffalldoy),
                        x1 = c(budburstdoy,leaffalldoy, shp_optdoy,
@@ -205,6 +157,9 @@ par(oldpar)
 #Extend simulation period
 options_b90$startdate <- as.Date("1980-01-01")
 options_b90$enddate <- as.Date("1999-12-31")
+
+soil <- cbind(slb1_soil, hydpar_wessolek_tab(texture = slb1_soil$texture))
+
 
 #set up options for table input 
 options_b90$standprop_input <- 'table'
