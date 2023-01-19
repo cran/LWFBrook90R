@@ -14,7 +14,19 @@
 
 <title>Multi-run simulations in LWFBrook90R</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -24,6 +36,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -125,7 +138,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -143,27 +336,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#data-management-i-output_fun-argument">Data management (i): <code>output_fun</code>-argument</a></li>
-<li><a href="#multi-run-simulations-with-run_multi_lwfb90">Multi-run simulations with <code>run_multi_LWFB90()</code></a></li>
+<li><a href="#data-management-i-output_fun-argument">Data management
+(i): <code>output_fun</code>-argument</a></li>
+<li><a href="#multi-run-simulations-with-run_multi_lwfb90">Multi-run
+simulations with <code>run_multi_LWFB90()</code></a></li>
 </ul>
 </div>
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>With ‘LWFBrook90R,’ parallelized multi-run simulations can be performed conveniently, extending the basic single-run applications using the function <code>run_LWFB90()</code> described in the introductory vignette. Two different multi-run functions exist for two different problems:</p>
+<p>With ‘LWFBrook90R’, parallelized multi-run simulations can be
+performed conveniently, extending the basic single-run applications
+using the function <code>run_LWFB90()</code> described in the
+introductory vignette. Two different multi-run functions exist for two
+different problems:</p>
 <ol style="list-style-type: decimal">
-<li>Perform Monte-Carlo simulations with single parameters set up for variation, and</li>
-<li>simulations over multiple locations, parameter sets, or climate scenarios.</li>
+<li>Perform Monte-Carlo simulations with single parameters set up for
+variation, and</li>
+<li>simulations over multiple locations, parameter sets, or climate
+scenarios.</li>
 </ol>
-<p>For the first case, the function <code>run_multi_LWFB90()</code> is available. The second problem can be tackled using the function <code>run_multisite_LWFB90()</code>, which is described in detail in the vignette <a href="LWFBrook90R-4-Multisite-Runs.html">‘Multi-Site simulations’</a>.</p>
-<p>Both functions are wrapper functions for <code>run_LWFB90()</code> and allow for parallel processing of tasks, using a specified number of CPUs to speed up the execution of a multi-run simulation. They return lists containing the individual single run simulation results, as they are returned by <code>run_LWFB90()</code>. These result-lists can become very large if many simulations are performed, and the selected output comprises daily data sets and especially the individual soil layers’ daily soil moisture states. Huge amounts of data produced can overload the memory, this vignette therefore starts with a data management section on how to make best use of the <code>output_fun</code>-argument of <code>run_LWFB90()</code> to reduce the amount of data returned.</p>
+<p>For the first case, the function <code>run_multi_LWFB90()</code> is
+available. The second problem can be tackled using the function
+<code>run_multisite_LWFB90()</code>, which is described in detail in the
+vignette <a href="LWFBrook90R-4-Multisite-Runs.html">‘Multi-Site
+simulations’</a>.</p>
+<p>Both functions are wrapper functions for <code>run_LWFB90()</code>
+and allow for parallel processing of tasks, using a specified number of
+CPUs to speed up the execution of a multi-run simulation. They return
+lists containing the individual single run simulation results, as they
+are returned by <code>run_LWFB90()</code>. These result-lists can become
+very large if many simulations are performed, and the selected output
+comprises daily data sets and especially the individual soil layers’
+daily soil moisture states. Huge amounts of data produced can overload
+the memory, this vignette therefore starts with a data management
+section on how to make best use of the <code>output_fun</code>-argument
+of <code>run_LWFB90()</code> to reduce the amount of data returned.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(LWFBrook90R)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span></code></pre></div>
 </div>
 <div id="data-management-i-output_fun-argument" class="section level2">
 <h2>Data management (i): <code>output_fun</code>-argument</h2>
-<p>To minimize memory allocation, it is recommended to reduce the selected output to a minimum and make use of the <code>output_fun</code>-argument of <code>run_LWFB90()</code>. With this argument, it is possible to pass custom functions to <code>run_LWFB90()</code>, which directly perform on the simulation output list object. With <code>rtrn_output = FALSE</code>, the original simulation output (<code>output</code>, <code>layer_output</code>) then can be discarded, and only the results from the <code>output_fun</code>-argument are returned. This can be very useful for model calibration or sensitivity analyses tasks comprising ten thousands of simulations in a Monte-Carlo setting. With this magnitude, memory allocation is critical, and only a relatively small output can be returned for each individual simulation (e.g., a measure of agreement between simulated and observed values). Similarly, it is possible to define functions for custom output aggregation, or to redirect the simulation output to a file or database, as we will see later.</p>
-<p>To demonstrate the usage of the <code>output_fun</code>-argument, we perform a Monte-Carlo simulation using the function <code>run_multi_LWFB90()</code>, and define a function that returns annual mean soil water storage and transpiration during the growing season. In a first step, the function integrates depth-specific soil moisture to soil water storage down to specified soil layer (<code>tolayer</code>, passed via <code>...</code> to <code>output_fun</code>), and in a second step calculates mean soil water storage over the growing season, along with the sum of transpiration. The growing season thereby is defined by the input parameters <code>budburstdoy</code> and <code>leaffalldoy</code>.</p>
+<p>To minimize memory allocation, it is recommended to reduce the
+selected output to a minimum and make use of the
+<code>output_fun</code>-argument of <code>run_LWFB90()</code>. With this
+argument, it is possible to pass custom functions to
+<code>run_LWFB90()</code>, which directly perform on the simulation
+output list object. With <code>rtrn_output = FALSE</code>, the original
+simulation output (<code>output</code>, <code>layer_output</code>) then
+can be discarded, and only the results from the
+<code>output_fun</code>-argument are returned. This can be very useful
+for model calibration or sensitivity analyses tasks comprising ten
+thousands of simulations in a Monte-Carlo setting. With this magnitude,
+memory allocation is critical, and only a relatively small output can be
+returned for each individual simulation (e.g., a measure of agreement
+between simulated and observed values). Similarly, it is possible to
+define functions for custom output aggregation, or to redirect the
+simulation output to a file or database, as we will see later.</p>
+<p>To demonstrate the usage of the <code>output_fun</code>-argument, we
+perform a Monte-Carlo simulation using the function
+<code>run_multi_LWFB90()</code>, and define a function that returns
+annual mean soil water storage and transpiration during the growing
+season. In a first step, the function integrates depth-specific soil
+moisture to soil water storage down to specified soil layer
+(<code>tolayer</code>, passed via <code>...</code> to
+<code>output_fun</code>), and in a second step calculates mean soil
+water storage over the growing season, along with the sum of
+transpiration. The growing season thereby is defined by the input
+parameters <code>budburstdoy</code> and <code>leaffalldoy</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>output_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, tolayer) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aggregate SWAT</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  swat_tran <span class="ot">&lt;-</span> x<span class="sc">$</span>layer_output[<span class="fu">which</span>(nl <span class="sc">&lt;=</span> tolayer),</span>
@@ -190,7 +430,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">param_b90 =</span> <span class="fu">set_paramLWFB90</span>(),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">climate =</span> slb1_meteo,</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">soil =</span> soil)</span></code></pre></div>
-<p>and apply the function to the return, to see that our custom output function works:</p>
+<p>and apply the function to the return, to see that our custom output
+function works:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output_function</span>(b90res, <span class="at">tolayer =</span> <span class="dv">15</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      yr swat_vp_mean tran_vp_sum</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2002     290.1533    202.9172</span></span>
@@ -198,13 +439,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="multi-run-simulations-with-run_multi_lwfb90" class="section level2">
 <h2>Multi-run simulations with <code>run_multi_LWFB90()</code></h2>
-<p>As mentioned, <code>run_multi_LWFB90()</code> is a wrapper for <code>run_LWFB90()</code>. <code>run_multi_LWFB90()</code> takes a data.frame <code>paramvar</code> containing variable parameter values in columns and their realizations in rows. For each row in <code>paramvar</code>, the respective parameter values in <code>param_b90</code> are replaced by name, and <code>run_LWFB90()</code> is called. Further arguments to <code>run_LWFB90()</code> have to be specified and are passed on.</p>
-<p>For the multi-run simulation, we set up two parameters for variation, the maximum leaf area index (<code>maxlai</code>) and the maximum leaf conductance (<code>glmax</code>). We define a data.frame with two columns, containing 50 random uniform realizations of the two parameters:</p>
+<p>As mentioned, <code>run_multi_LWFB90()</code> is a wrapper for
+<code>run_LWFB90()</code>. <code>run_multi_LWFB90()</code> takes a
+data.frame <code>paramvar</code> containing variable parameter values in
+columns and their realizations in rows. For each row in
+<code>paramvar</code>, the respective parameter values in
+<code>param_b90</code> are replaced by name, and
+<code>run_LWFB90()</code> is called. Further arguments to
+<code>run_LWFB90()</code> have to be specified and are passed on.</p>
+<p>For the multi-run simulation, we set up two parameters for variation,
+the maximum leaf area index (<code>maxlai</code>) and the maximum leaf
+conductance (<code>glmax</code>). We define a data.frame with two
+columns, containing 50 random uniform realizations of the two
+parameters:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">50</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>paramvar <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">maxlai =</span> <span class="fu">runif</span>(N, <span class="dv">4</span>,<span class="dv">7</span>),</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">glmax =</span> <span class="fu">runif</span>(N,<span class="fl">0.003</span>, <span class="fl">0.01</span>))</span></code></pre></div>
-<p>Now we can run the simulation. We suppress the selected simulation result objects and model input from being returned, and only return the values from our <code>output_fun</code> defined above. We pass <code>tolayer = 15</code> so that soil water storage is integrated down to the 15th soil layer, corresponding to 0-100 cm soil depth. Note that the <code>param_b90</code> object (and thus parameters <code>budburstdoy</code> and <code>leaffalldoy</code>) is available to our <code>output_fun</code>, although it is not included in the return (<code>rtrn_input = FALSE</code>).</p>
+<p>Now we can run the simulation. We suppress the selected simulation
+result objects and model input from being returned, and only return the
+values from our <code>output_fun</code> defined above. We pass
+<code>tolayer = 15</code> so that soil water storage is integrated down
+to the 15th soil layer, corresponding to 0-100 cm soil depth. Note that
+the <code>param_b90</code> object (and thus parameters
+<code>budburstdoy</code> and <code>leaffalldoy</code>) is available to
+our <code>output_fun</code>, although it is not included in the return
+(<code>rtrn_input = FALSE</code>).</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mrun_res <span class="ot">&lt;-</span> <span class="fu">run_multi_LWFB90</span>(<span class="at">paramvar =</span> paramvar,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">param_b90 =</span> <span class="fu">set_paramLWFB90</span>(),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">cores =</span> <span class="dv">2</span>, <span class="co"># arguments below are passed to run_LWFB90()</span></span>
@@ -214,15 +474,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">rtrn_input =</span> <span class="cn">FALSE</span>, <span class="at">rtrn_output =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">output_fun =</span> output_function,</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tolayer =</span> <span class="dv">15</span>) <span class="co"># argument to output_fun</span></span></code></pre></div>
-<p>The result is a list of the individual single-run results, from which we can easily extract the results of our output function and <code>rbindlist()</code> them together in a data.table:</p>
+<p>The result is a list of the individual single-run results, from which
+we can easily extract the results of our output function and
+<code>rbindlist()</code> them together in a data.table:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mrun_dt <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(mrun_res, <span class="cf">function</span>(x) x<span class="sc">$</span>output_fun[[<span class="dv">1</span>]]), </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">idcol =</span> <span class="st">&quot;singlerun&quot;</span>)</span></code></pre></div>
-<p>Now we can display the results of the 50 simulations using boxplots:</p>
+<p>Now we can display the results of the 50 simulations using
+boxplots:</p>
 <div class="figure">
 <img src="data:image/png;base64,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xbIKieetqKj44YcfevbsKfG8QginXk4WdotVrR5eXl5z5szRarWrV6+OiorSarX379/v3r37vn379K1SZ3//+9+FEL169bp586ZWq33ttdc8PDySk5O/+uqrmTNnqtXq//7v/67/LE5OThs2bKj/+wD19OKLL/70009yV/F/hIaGfvzxx9LM1aVLl3feeaeqqkqr1er242fPnl09On369Jdeeqn+s7C9K1V+fv5zzz0ndxV/gozbu95P8Ddu3NA1wffp0ycpKUkI4eDgMHfu3IULF4aGhhp3J+Pjjz+Oi4tLSEgQQty8efN///d/jx492qtXLyHEoEGD1Gp1UlLSm2+++cz3qaiouHbtmr5RrclOJQKWbsOGDd27d8/Ozn755ZdtbW1rDunrX62z3377LSEhQdfGFhwcLIR45ZVXqkcHDBiwYcMG484IWCe9Ae/h4XHx4kUhhL+/f25u7uXLl9u0aePq6nru3DmjF1FcXNytWzfd13/88YcQomvXrtWjvXv3XrNmjSHvc+LEibFjx+obLSsrKygoqFehgEKlpaXl5uZ+/PHHTw4Zfc/Yzc3twoULgwYNEkI0atQoKSmp5oX6N27c8PDwMO6MgHXSe/1aaGjo8uXLt23bZmNj06lTp+XLl1+5cuWTTz5p2bKl0Yvo1avXf/3Xfz169EgI4efn5+zs/P3331ePfvvtt+3btzfwfa7o16hRIws7fQJIZfny5aNGjbpw4ULFE4w+V3h4eHx8/Pr163/99VchxLRp03RPk9JqtT/++OPChQuluRQAFsrBwcHPz0/uKiyEvmP3RUVFw4cPj4iI0Gq13377re6ona2t7Y4dO4x+nuDXX39t1qzZf/zHf3z00UeHDx9etGjR888/n5qaevjw4bi4OFtb2//5n/+p/yyck4OZMMNz8A4ODidOnJBmrnv37kVFRalUqldffbXm8pCQECFE+/btc3Nz6z8L2zvMhDmeg3dxcdm9e7fu66CgoFu3bp06dapdu3atW7c2+k6Gn5/fsWPHkpKSli5dWv18iHfeeUcI0aFDhy1btkRGRhp9UgDVOnXq9M9//rNHjx4SzOXk5LR58+bVq1ffvn275vKJEycuWLCgc+fONjY2EpQBKN6zewkfPnx4/fp1Hx+fAQMGmK6Otm3brl279u9///v169dv3bp19+5djUbTvHlzngQPSCAyMjI2NvbcuXPdunV7LF+NfmtqncaNGzdu3LjmEp4pBQM9evSoYcOGcldhAWoL+LVr1y5duvT69eu6D/v9+/cPDw+fMmWKiUqprKy8fv16ixYtHgv1Bw8eFBUVubu7m2heACtXrmzWrNmJEydOnDjx2JCJAl55Vq5caeDlwE8qLi5u0KCBk5NT3VafNWvWxIkT67auxSkuLu7SpcuVK1fkLsQC6A341NTUd999d9y4cb169RozZowQIjAw8L333rOzszP6faYqKioWLFiwYsWKsrIyBweHKVOmJCQkVH+M2L59+9ixY7U0uQEmI+WzJ5Rq8uTJw4YNq9u6iYmJDg4OkydPrtvqnp6edVvREj169Ki4uFjuKiyD3oBPTEycNm3aypUr79y5o1uyYMGCBw8efPLJJ0YP+KSkpCVLlkydOjUwMPD48eMrV67Mz89PTU017iwAYDr29vbe3t51W7dJkyaOjo51Xh14Kr0Bn52d/eRJ9+Dg4LVr1xq9iI0bN86aNUt3o5uIiIiAgICoqKhhw4YNHTrU6HMBeFIt57/T09OlrASAsejtg/fz8/vhhx8eW3jq1CkfHx+jF5Gbm6u7a57O6NGjo6Kipk2bVlZWZvS5ADzpuf9LrVb/+OOPX331la+vr9ylWQU7Ozt7e3u5q7AM9MEbTu8n+ClTpowfP97W1rZfv35CiPz8/PT09EWLFi1dutToRbRv3/7QoUO6LlidxMTEjh07xsTEbNmyxejTAXjMpk2bHltSWlo6fPjwn376SZZ6rM3cuXN19+7FMzk6On777bdyV2EZ9Ab82LFji4uL58+fP2/ePCFEs2bN7Ozspk+fPm3aNKMXER4ePm/evLKysv79+4eGhtrZ2TVr1mzTpk1Dhw5VqVTctxKQnqOj49y5c1999dX8/Hw3Nze5y1E4tVqWp59C4Wr7q5o6dWp0dPS5c+eys7Pd3Nw6duz43HPPmaKI2NjY0tLSNWvWJCcnX758WXcWICQkJC0tbcKECXl5eaaYFEDtSktLHRwcTLTVA3VGH7yBagv4kpKS7OxsOzs73Xm43Nzc3NxcIUTNJ0MYhY2NTUJCwocffnj9+vWan9fDwsKuXr169OjRS5cuGXdGADVt3br1sSV3795NTEx8+eWXOXQsgfXr1zdq1CgqKkruQiwAffCG0xvwn3/+eXR09IMHD54cMlFLesOGDZ/sElGr1X379u3bt68pZgSgM27cuMeWNGjQ4MUXX0xOTpalHmtz9epVR0dHuauwDPTBG05vwMfFxXXv3n327Nlt2rSRsiAA0qNjBVAevQFfVFS0ZMkSntsIWKHffvstKyure/furq6uctcCoI709sEHBQWdPHlSylIAyCUnJ+e1116bNWuWEGLPnj0dOnQYPHiwr68vbXLSoA/ecPTBG07vJ/gNGzZ07949Ozv75Zdf1j0MvlpERITpCwMgnalTp547d+6vf/2rEGLBggX9+/dPTk6eMGHCvHnzuJOdBOiDNxx98IbTG/BpaWm5ubkff/zxk0M89wVQmKNHjy5dujQ8PPzGjRs//fTTihUrvLy83n777ffee0/u0qwCffAwBb1/VcuXLx81atTf/vY3LrKDBB4+fLhu3bqndm08k1arvXDhgr+/f92mfu6556Kjo+u2rmJUVVW5uLgIIQ4cOGBvb6+7dbSzszMX38EM0QdvIL0Bf/PmzalTp3InakijvLz81q1bVVVVdVi3rKxsx44dU6dOrdvUjx49qtuKStK9e/cNGzZ4enomJSUNHDjQ3t4+Pz9/7dq1nOyUBn3whqMP3nB6A75Tp07//Oc/e/ToIWU1sFpOTk66xwnWwR9//PH555+b4ikJ1uOjjz4aOHBgz549XVxcPvvsMyFEz549r169unv3brlLswr0wRuOPnjD6Q34yMjI2NjYc+fOdevWzcbGpubQjBkzTF8YAOl06tQpKyvr/PnzXl5euta4xYsXd+7cuW3btrpvOH36dEBAgKw1Avhz9Ab8ypUrmzVrduLEiRMnTjw2RMADyuPg4FAzwkeOHFlzdNy4cWfOnJG8KAB1pzfgc3Jyal+TPXqYiSZNmnz44YdyVwHUHX3whqMP3nB1781gjx5mQq1W6xq4AQtFH7zh6IM3HM2XACAz+uBhCnpvVQtYCq1Wu2/fPrmrACARWlsNRMDD4t25c+ftt9+Wuwqg7tavX79lyxa5q7AMxcXFdb6rlbXhuBAAyIw+eMPRB284PsEDAKBABDwAAArEIXpYPPrgjeXevXu//vprTk5OixYtOnTo0Lhx4+qhxYsXy1iY4tEHbzj64A1HwMPi0Qdff1qtdv78+StXrrx3755uSaNGjaZNm7Zo0SJdf3ZISIisBSocffCGow/ecM8IePboAWuwbNmyBQsWzJo1680332zZsuWNGze2bNmydOlSZ2fn2NhYuatTPvrgYQp6/6rYo4el0Gq1X375ZVhYmNyFWLBPP/105syZy5Yt071s0qTJ4sWLq6qqPvvsMwIe5obnwRtI70V2uj36SZMm/etf/yooKDh//vy0adOWLl1a/S8AMBP0wddTRUXFxYsXg4KCHlseFBR069YtWUqyNvTBG44+eMPp/QTPHj1gJWxsbDw9Pffv3z906NCay/ft2/dk6htdSUlJeXm5RqMx9UTmjD54w9EHb7inB3wte/QpKSmmrwqAdFQqVUpKyvDhw+/cuTNq1KjmzZvfvHlz+/bt6enp27ZtO336tO7bOnbsaKzjojk5OevWrdu1a1dubm5paakQws7OztPTc8SIEePHj/fy8jLKLICVe3rAy7tHD0BigwcPFkLs2rVr165dNZcPGzas+uvs7OzWrVvXf64zZ84EBQU1bdo0LCzMz8/P1dVVq9UWFhZevHhxx44dKSkphw8f7tSpU/0nqoPbt28/80nZpnDz5k17e/vqfSkp+fj4NGnSRPp5IYGnB7z0e/RAndEHX3+XL19+5vd4eHgYZa7p06f36dNn9+7dDg4Ojw0lJSWNGTNm5syZBw8eNMpcf9bEiRP/8a9/iMbP/k4juyuESqz9Ya3080b1jNq8ebPU89YDffCG03sOXso9eqA+6IOvv5UrV0ZFRb3yyisSzJWZmZmamvpkugsh1Gr15MmThwwZIkEZT1VRUSFWCiHb/JLbJir2VshdxJ9DH7zh9Aa8lHv0AOS1d+/etWvXenl5RUVFjR492tfX13RztWvXLiMjIyIi4qmjGRkZJp0dsB56A17KPfrHcFUt/hT64OsvJyfnhx9+2L1795YtWxYuXNitW7fRo0frTs8Zfa7Y2NiRI0dmZWWNGDHC399fo9GoVCrdOfi0tLS9e/du377d6JNCSeiDN5DePvi9e/cGBgZ6e3vHx8f/9ttvpq4jJyfn/fff9/X1dXJycnZ2dnV1tbe3b9u2bVxcXFZWlqlnh0WjD77+VCpVjx49li9f/vvvv2dmZg4cODAlJaVly5aDBg0y+lwRERHp6ekPHjyIjo4ODAz09/f38/Pr0aPHW2+9VVhYmJ6eru/DPSDog/8z9H6Cl3KP3pyvqgWsTZs2bTp37nz16tXs7Oyvv/7aFFOEhoaGhoYWFBTk5eXduHFDCOHu7u7h4eHq6mqK6aAk9MEbTm/A6/bodTv1Z86c2b17d0pKysyZM/v373/gwAHjFmHOV9UCViInJyc9Pf2LL744fPiwVqsNDg5etWpVzYtqjU6j0Wg0mg4dOlRVVWVlZVVUWNjVXoCZM+h58Lo9+m7dutna2ppijz4zMzM6OrqWq2pPnTpl9EkBVOvatWurVq2mT59ua2ubkmqxLjEAACAASURBVJJy69atf/7znzExMW5ubkafKyYm5siRI9UvV6xYodFo2rRp4+7u/sILL+zevdvoMwLWqbaAz8nJWbt27aBBg5577rm//OUvt2/fXrVqle54mnHprqrVN8pVtagdffD198ILL2zduvX27dvp6eljx4598hJXI96DZePGjRcuXNB9nZKSMmvWrNdff33Pnj1ffPHFwIEDIyMjjX6MEEpCH7zh9B6i79q165kzZ+zs7AYMGJCSkhIeHm66y9q5qhb1QR98/e3Zs6f2bxg3btyZM2eMPu/q1asnTJiwbt063cshQ4bY2touWrTIFBf3QRnogzec3oB/4YUXZs6cGRYW5uLi8tRvOH36dEBAgFGK0F1Vm5iYGB0dXXO5SqUKDg5OT0/X3XUHgML8/vvvCQkJNZeEhIQYeGO1o0eP1tI9cf/+/bt379a3PsCS6Q14iffouaoWdUYfvOXy9fXNzs6uuSQvL8/AO2j17NmzlmtvX3zxRf57KBV98AbSG/CyqL6qVvdS14tvist8oCS6Pvj8/Hy5C4Gh4uPjd+7c6ePj4+bmNn/+/NDQUG9vbyFERkZGfHz8G2+8Ycib2NjY6NZ6KpVKZbRyYU6Ki4u7dOly5coVuQuxAAZdRS+XYcOG/fzzz3JXAcCY9uzZM3v2bF9f32vXrmVnZ9+7d+/kyZNCiNOnT/fr169NmzaPHbQHaqIP3nBm8Qn+H//4h74zAkuWLPn000+FEJb1vCMA+rz++us1X1ZVVek64Fu1apWZmdmlSxeZ6gKUxiwC3s7Obs+ePffv3w8ICLC1ta05lJeXV1paKldhAEyksrLy2rVrLVq0sLe3151PdXNzc3Nze/DgQVFRkbu7u9wFAhbPLAI+JCQkMzNz9OjRNjY2n332Wbt27XTLVSrVJ5980q9fPwPfJzMzc+nSpfpGdf84jFAuzAx98JaloqJiwYIFK1asKCsrc3BwmDJlSkJCgo2NjW50+/btY8eO1Wq18hYJs0UfvOHMIuCFEL6+vidOnPjggw8CAgKWL18+ceLEOryJj4/PG2+8UVVV9dTRffv2OTk51a9MmCP64C1LUlLSkiVLpk6dGhgYePz48ZUrV+bn56empspdFywDffCGM5eAF0LY2touXbp08ODBb7755hdffFGHDb5x48a1PIfqnXfeqf6UAOBPWbx4sbHeauPGjbNmzdJdSRcREREQEBAVFTVs2LChQ4caawoAopaALyoqcnFxeazVpLKysrS0VN+tb4yiT58+P//888SJEzt27Gi6WaAk9MHX3927d+Pj48+ePVtZWfnY0IkTJ4QQISEhxporNzc3KCio+uXo0aMPHDgwbdq0AQMGPPWBFMBj6IM3kN6Ab9Kkyc2bNx+71OXMmTP9+vXTnck24h79k1Nv27Zt27ZtP/zwg6enp4lmgWLQB19/48eP379/f2RkpAS3nWjfvv2hQ4dq7jEkJiZ27NgxJiZmy5Ytpp4dlo4+eMM9HvCnTp2qTu6xY8fa29vXHL106VLTpk11Xxtxj16n5lW1QohRo0aNGjVK/PviOK6qBUzn4MGDycnJb731lgRzhYeHz5s3r6ysrH///qGhoXZ2ds2aNdu0adPQoUNVKpWBt7GD1aIP3nCP3+hGrVY7OTnpLkZzdHR0+r+6d+9uimthKioq4uPjnZ2dvb29XV1d58yZU/M44fbt25s3b270SQHolJeXFxcX+/j4SDNdbGxsXFzc1q1bIyIirl+/rlsYEhKSlpaWkZGxbNkyacoAFO/xT/CdO3fW3VLm8uXL69evl+ZmzlxVC8jI1tY2LCwsJSWl5qlx07GxsUlISPjwww+vX79e8/N6WFjY1atXjx49eunSJQnKABRP7zl43ZU1j7lz586qVavmz59v3CK4qhb1QR98/UVERMyePbtr166DBg1ydXWteXXtjBkzTDFjw4YNn7yTvFqt7tu3b9++fU0xI5SBPnjD6Q14rVa7bdu2s2fP1mwrP3/+/Pfff2/0gOeqWtQHffD198EHH9jZ2eXn5z95T2gTBTxQN/TBG05vwC9cuHD+/PkdO3Y8f/58s2bNPD09r169WlxcnJycbPQiuKoWkFdOTo7cJQAwMr1Pk/v0009nzZp19uzZpKSk4ODgEydOXLlypUOHDqY4Kx8eHr5y5crJkyfv2bPn4cOHQgjdVbXbtm178803f/31V6PPCCXRarX79u2TuwoFunPnzt/+9je5qwAe9+jRI7lLsAx6P8HfuHFDd9i8T58+SUlJQggHB4e5c+cuXLgwNDTUuEXExsaWlpauWbMmOTn58uXLuqt5dVfVTpgwIS8vz7jTQWHog68/KU/JAfVBH7zh9Aa8h4fHxYsXhRD+/v65ubmXL19u06aNq6vruXPnjF4EV9UC8pLylJw5KyoqElZ2aW9xiIX1lNMHbzi9h+hDQ0OXL1++bds2GxubTp06LV++/MqVK5988knLli1NVIruqlo7O7uaC3VX1U6YMMFEkwIQ0p6SAyANvQG/cOHCwMDAXbt2CSFWrFixadOmNm3apKWlLViwQMLyAEih5ik5XYts9Sk5uUsDUEd6D9G7uLjs3r1b93VQUNCtW7dOnTrVrl271q1bS1UbYBD64OtPylNy5qxx48biCyGGyF2HZLYJl70mfHiYKdAHbzi9n+DPnj2r1WqrX2o0mgEDBpDuMEP0wdef9KfkgLqhD95wegO+S5cuzZs3f/PNNzdv3nzz5k0pawIgMU7JAcqj9xD93r17jx07duzYsXHjxj169KhTp06vvfbaa6+9FhQU9Ngj5gB58Tz4eiovLy8oKNi6datu0+aUHMwcz4M3kN5P8EOHDv3oo4++++67wsLCb775ZuTIkd99992AAQO4qhbmRtcHL3cVFqyqqqpLly779++vXsIpOZit4uJif39/uauwDHoDXuf27dtfffXV3r179+7d+8MPP9ja2nbq1EmaygBIw87ObsKECZs3b6552Q1gnuiDN5zeQ/TR0dHHjh27ePFio0aNevToERISsnTp0h49ejRq1EjK+gBIICAg4Pjx4126dBk0aJC7u3uDBv//rv97770nY2EA6kxvwOsex96vX7+pU6f27t27SZMmElYFQFJTpkzRffHZZ589NkTAAxZKb8AfPXr0u+++++6778aNG/fHH3906NAhMDCwZ8+egYGBbdq0kbJEoHb0wdffhQsXXFxcaj4GXghRWVlZWloqV0nAU9EHbzi9Ad+rV69evXrpvr506dLx48c//fTT9evXCyE4UQezQh98/TVp0uTmzZvu7u41F545c6Zfv35FRUVyVQU8iT54w+kNeCGEVqs9f/78kSNHjh49euTIkZs3b7Zs2XLAgAGSFQfApE6dOrV48WLd12PHjn2sA/bSpUtNmzaVoy4ARqA34IcPH3706NE7d+44Ozu/+uqrc+fOHTBgAAdGYIbog68ztVrt5OSk+9rR0dHBwaHmaPfu3ceMGSNHXUBt6IM3kN6Av3Xr1l//+tcBAwb06NFDra7tgz4gL54HX2edO3fevHmzEOLy5cvr16/nLhcwfzwP3nB6k/v48eM1X/72229ZWVndu3fnXwD0KS4u3rhxY3l5ucTzlpaWlpWVLVu2TOJ5hRCOjo6TJ0+u2VRmoXRPkAPMH33whtMb8Dk5OdHR0brHTuzZsycyMrKysvK55577+uuvudcNnur06dMzZvxdiP+UfOYqIQJjYwskn1cIsWj48OHPP/+8HFMDQG30BvzUqVPPnTunuzh5wYIF/fv3T05OnjBhwrx589LT0yWsEJbFR4ilctcgpc1yFwBYpOLi4srKyjqsWFhYqNVqCwrquENva2tbfd2J4tXWB7906dLw8PAbN2789NNPK1as8PLyevvtt7nrBQCgPu7cudO+ffu6nc7TarUlJSU+Pj51m7p58+bnz5+v27oWR2/AV1VVubi4CCEOHDhgb28fFBQkhHB2di4rK5OuOgCA4jRt2vTWrVtyV6F8egO+e/fuGzZs8PT0TEpKGjhwoL29fX5+/tq1a+mUAwDA/OkN+I8++mjgwIE9e/Z0cXHR3Z66Z8+eV69e3b17t4TlAQCAutAb8J06dcrKyjp//ryXl5euNW7x4sWdO3du27athOUBAIC6qO0ONg4ODgEBAdUvR44cafp6AACAEVj8DToAAMCTCHgAABSIgAcAQIEIeAAAFIiAByCnkpKSOt92FEAtCHgAUsvJyXn//fd9fX2dnJycnZ1dXV3t7e3btm0bFxeXlZUld3WAQvCgdwCSOnPmTFBQUNOmTcPCwvz8/FxdXbVabWFh4cWLF3fs2JGSknL48GEeWQnUnzkGfElJSXl5uUajkbsQAMY3ffr0Pn367N6928HB4bGhpKSkMWPGzJw58+DBg7LUBiiJuRyi55AdYCUyMzOjo6OfTHchhFqtnjx58qlTp6SvClAes/gEzyE7wHq0a9cuIyMjIiLiqaMZGRm+vr4SlwQoklkEPIfsAOsRGxs7cuTIrKysESNG+Pv7azQalUql26FPS0vbu3fv9u3b5a4RUAKzCPjMzMzU1NRaDtkNGTJE+qoAmEJERER6enpiYmJ0dHTN5SqVKjg4OD09ffDgwXLVBiiJWQQ8h+wAqxIaGhoaGlpQUJCXl3fjxg0hhLu7u4eHh+7BlQCMwiwCnkN2gBXSaDQajaZ169Z0zQCmYBYBzyE7wKrk5OSsW7du165dubm5paWlQgg7OztPT88RI0aMHz/ey8tL7gIBJTCLgBccsgOsBl0zgDTMJeCFEJWVlYWFhT4+Ph06dKi5/MGDB0VFRe7u7nIVBsCI6JoBpGEWAV9RUbFgwYIVK1aUlZU5ODhMmTIlISHBxsZGN7p9+/axY8dqtVp5iwRgFMbqmjl27Ni0adP0jd6/f59n2MDKmUXAJyUlLVmyZOrUqYGBgcePH1+5cmV+fn5qaqrcdQEwPmN1zbz88svr16/Xt+vfu3dvLtyDlTOLgN+4ceOsWbMSEhKEEBEREQEBAVFRUcOGDRs6dOifep/S0tITJ07oG62srOQwACA7Y3XN2Nradu3aVd9ogwbmch9uQC5mEfC5ublBQUHVL0ePHn3gwIFp06YNGDDgqcfx9Dl//vyyZcv0jT569Ki4uLhehQKoN7pmAGmYRcC3b9/+0KFDISEh1UsSExM7duwYExOzZcsWw9/npZdequXaHGdn58aNG9erUADGQNcMIAGzCPjw8PB58+aVlZX1798/NDTUzs6uWbNmmzZtGjp0qEql8vDwkLtAAEZG1wxgamZxmio2NjYuLm7r1q0RERHXr1/XLQwJCUlLS8vIyKjlqDsAi1NRUREfH+/s7Ozt7e3q6jpnzpzKysrq0e3btzdv3lzG8gDFMItP8DY2NgkJCR9++OH169drfl4PCwu7evXq0aNHL126JGN5AIyIrhlAGmYR8Do2NjYqleqxC93VanVgYOBjB/EAWC5jdc2Yyhoh9kk+aZ4QNkJIf17iihBukk8KqZhFwHOjG8B6GKtrxhTmzp0b9nOY9POm5aTZqe0GB0jePhAgamk1hKUzi4DnkB1gPYzVNWMKPXr06NGjh/TzXr161dHRcfz48dJPDQUzi4A390N2AIyHrhlAGmYR8OZ8yA6AccXGxpaWlq5ZsyY5Ofny5cs+Pj7i310zEyZMyMvLk7tAGahUKpVKJXcVUBqzaJPTHbKruSQxMbG0tDQmJkaukgCYiK5rJj8//8qVKy1btqxeruuaOXTo0Lp162QsTxYxMTFjxoyRuwoojVl8gueQHWBtGjZs6O3t/dhCtVrdt2/fvn37ylKSjFq3bi13CVAgswh4DtkBAGBcZnGInkN2AKzZwYMHjx49KncVUBqz+ASvwyE7RcgRYoLcNUipTO4CoATffPONo6Nj79695S4EimJGAQ9F+EOI9XLXIKVGchcAAE9nFofoAQCAcfEJHsblKYRVPf3vfbkLgBLQBw9TIOBhXM8JYVW325wvdwFQgpiYGLWa/8YwMv6kAEBm9MHDFDgHDwCAAhHwACAz+uBhCgQ8AMjsm2++OXbsmNxVQGkIeAAAFIiABwBAgQh4AJAZffAwBdrkAEBm9MHDFPiTAgCZ0QcPU+AQPQAACkTAA4DM6IOHKRDwACAz+uBhCgQ8AAAKRMADAKBABDwAyIw+eJgCbXIAIDP64GEK/EkBgMzog4cpcIgeAAAFIuABQGb0wcMUCHgAkBl98DAFAh4AAAUi4AEAUCCuoofR2NjYCHFKiG6Sz6wV4poQslyHnG9jYyPHvFAU+uBhCgQ8jKZnz56nT3+j1Wqln/rnn39+8cUXpZ+3YcOG7u7u0s8LhaEPHqbAnxSMxsbGpmvXrrJMHRAQIMu8gFHQBw9TMMdz8CUlJQUFBXJXAQCABTOXgM/JyXn//fd9fX2dnJycnZ1dXV3t7e3btm0bFxeXlZUld3Uwa48ePVq4cKHcVaCO2KEX9MHDNMziEP2ZM2eCgoKaNm0aFhbm5+fn6uqq1WoLCwsvXry4Y8eOlJSUw4cPd+rUSe4yYaaKi4tXrVr1wQcfyF0IDJWTk7Nu3bpdu3bl5uaWlpYKIezs7Dw9PUeMGDF+/HgvLy+5C5TaN9984+jo2Lt3b7kLgaKYRcBPnz69T58+u3fvdnBweGwoKSlpzJgxM2fOPHjwoCy1ATAudugBaZhFwGdmZqampj6Z7kIItVo9efLkIUOGSF8VAFNghx6Qhlmcg2/Xrl1GRoa+0YyMDF9fXynrgWWhh9iyZGZmRkdH17JDf+rUKemrkhd/wzAFs/gEHxsbO3LkyKysrBEjRvj7+2s0GpVKpTtkl5aWtnfv3u3bt8tdI8xX06ZN9+7dK3cVMJRuhz4iIuKpo9a5Q08fPEzBLP6kIiIi0tPTExMTo6Ojay5XqVTBwcHp6emDBw+WqzZYhFdeeUXuEmAoduifRB88TMEsAl4IERoaGhoaWlBQkJeXd+PGDSGEu7u7h4eHq6ur3KUBMCZ26AFpmEvA62g0Go1G07p16/Lyco1GI3c5sAyPHj1atmwZbXIWhB36xxw8eNDOzo42ORiXWVxkJ7jRDepB1wcvdxX40zQaTYcOHfr379+3b99GjRpVVFTIXZFseB48TMEsPsHTFwtYj5iYmKioqD59+uherlixYuHChcXFxUKI1q1bJyYm6rv+DsCfYhYBT18sYD02btzYrVs3XcCnpKTMmjXrrbfeCg8PV6vV+/bti4yM/PLLLwcNGiR3mYDFM4uAN9aNbo4fP/7ee+/pGy0rK9N9SoDC0ENsuVavXj1hwoR169bpXg4ZMsTW1nbRokXWFvD8DcMUzCLgjdUX+9JLL6WkpOgbfeutt3r06FHHEmHG6IO3XL///ntCQkLNJSEhIZs3bzZk3RMnTkyZMkXfaFlZ2b179+pbn1Tog4cpmMWflLH6Yhs2bFjLc8GdnZ0bNDCXiwphXPTBWyhfX9/s7OyaS/Ly8jw8PAxZt0uXLrXs0EdFRb388sv1LE8y9MHDFMwi4OmLBaxKfHz8zp07fXx83Nzc5s+fHxoa6u3tLYTIyMiIj49/4403DHkTe3v7WnbomzRpwg49rJxZBLygLxb1QB+8ZdmzZ8/v/5adnX3v3r2TJ096e3ufPn26X79+vXr1euygvTWgDx6mYC4BL4SorKwsLCz08fHp0KFDzeUPHjwoKipyd3eXqzCYOZ4Hb1lef/31mi+rqqp0HfCtWrXKzMzs0qWLTHXJiefBwxTM4hBWRUVFfHy8s7Ozt7e3q6vrnDlzKisrq0e3b9/evHlzGcsDYDoNGjRo2LChEMLNzc060x0wEbP4BJ+UlLRkyZKpU6cGBgYeP3585cqV+fn5qampctcFAIClMouA37hx46xZs3Qn3iIiIgICAqKiooYNGzZ06FC5S4NEioqKJk+eXF5eXod1Hz16dO/evcjIyLpN7ebmtmbNmrqtC1TbsWPHrl276rbuL7/8olarz549W4d1VSrVmDFjQkND6zY1FMwsAj43NzcoKKj65ejRow8cODBt2rQBAwY89e43UB5HR8cRI0bU+W7kL730Urt27eq2rrOzc91WRN188cUX3377be3fs3z5cmmKMaLOnTvX+WY1r776qo2NTZ2vKfb396/bilA2swj49u3bHzp0KCQkpHpJYmJix44dY2JitmzZImNhkIxarX7s2isoVaNGjY4cOXLy5El7e/uWLVs+9XssMeDbtWtX571MwBTMIuDDw8PnzZtXVlbWv3//0NBQOzu7Zs2abdq0aejQoSqVysC7XgCwCP379w8ODg4ODtZqtc/8KA+gzsziKvrY2Ni4uLitW7dGRERcv35dtzAkJCQtLS0jI2PZsmXylgfAuGxsbAy8mw2AOjOLT/A2NjYJCQkffvjh9evXa35eDwsLu3r16tGjRy9duiRjeQCMLjw8XHf3OgAmYhYBr9OwYcMnN3i1Wt23b9++ffvKUhIAE2nZsqW+E/AAjMIsDtEDAADjIuABAFAgAh4AAAUi4AEAUCAzushOAnv37v3555/lrsIgv/zyy7Vr17jJmiG0Wm1BQUF4eLjchRjqzp07cpdgFdjeFYnt3XBWFPDR0dEnT568e/eu3IUY5PDhw0VFRU2bNpW7EAtQWVn5+++/W9Al2RERES+88ILcVSgc27tSsb0bTqXVamWZGLV7//33HR0d586dK3chFuCPP/7w9/fPz8+XuxCgjtjeDcf2bjjOwQMAoEAEPAAACkTAAwCgQAQ8AAAKRMADAKBABDwAAApEwAMAoEAEvJlSq9W2trZyV2EZ1Gq1Wm1Ft2yC8rC9G47t3XDc6MZM3b9/X6VSOTg4yF2IZbhz5w53AYPlYnv/U9jeDUTAAwCgQByiBwBAgQh4AAAUiIAHAECBCHgAABSIgAcAQIEIeAAAFIiABwBAgQh4AAAUiIAHAECBCHgAABSIgAcAQIEIeIlUVlYuWbKkR48ezs7Ofn5+K1asqKioqB7dvXt39+7dmzRp0rdv37Nnz9ZcUd9Q7W9o0Yz+uyopKfl//+//eXt7Ozk5devWbdeuXdL9MLBKbO+GY3s3IS0kERcXJ4SYPn36vn37YmNj1Wr1Bx98oBvat2+fSqWaNGnSzp07Bw0a5OjoeO3atWcO1fKGls7ov6uoqChnZ+ekpKT9+/ePHTtWCPH111/L87PBOrC9G47t3XQIeCk8fPjQxcVl0qRJ1UumT5/u4OBQUVGh1WqDg4MHDRqkW37//n1PT8+5c+fqXuobqv0NLZrRf1eFhYUqlSolJUU3VFVV5evrO3bsWMl+IlgbtnfDsb2bFIfopXD9+vXi4uL+/ftXLwkMDCwrK7t27VpBQcHhw4dHjhypW+7g4BAaGqo7plTLUC1vKN1PZRpG/13dvn27T58+vXr10g2pVCp3d/f79+9L+lPBmrC9G47t3aQIeCl4eHhcvnw5NDS0esnx48cdHBxatGiRl5cnhPD3968e8vf3z83NFULUMlTLG5r+pzEto/+u2rZte/jwYd3Q/fv3v/zyy5MnTw4ZMkSqHwhWh+3dcGzvJkXAS8HOzs7Hx8fOzk73cuvWrZ988sm7775rb29/8+ZNIYRGo6n+ZldX19LS0pKSklqGanlD6X4q0zD676p6yccff+zk5BQWFjZhwoSoqCiJfh5YH7Z3w7G9m5Ra7gKsS35+/owZMzZv3jx27NiEhAQhhFarFUKoVKrq79EtKS8vr2WoljdUDKP/rsLDw1944YXvvvvu448/btGixezZs6X6UWCl2N4Nx/ZuCgS8dL766quxY8c6OjqmpaWFh4frFrq7uwshCgsLq7+tsLDQzs5Oo9HUMlTLGyqD0X9XQggvLy8vL69hw4ZVVFQsWLBg5syZDRpwBAumwvZuOLZ3E7G6H1gu+/fvHzJkyIABA86dO1dz4/Tw8FCpVBcvXqxecunSpZYtW9Y+VMsbKoBxf1fp6emhoaG6HXydDh06lJaWlpaWSvHDwCqxvRuO7d2EpL5s3yqVl5c///zzo0ePfupo3759hw8fXv2d3t7ec+bMqX2o9je0aEb/XZ06dUoI8eOPP1a/ybhx41q2bGnCnwHWje3dcGzvJsUheikcPXo0Ly/Pw8Pjs88+q7n8jTfesLe3nzlz5pAhQxYtWhQcHJycnFxQUDBhwgTdN+gbqv0NJfu5TMHov6vOnTv7+/uPGjUqPj6+efPmX3/9dWpq6tq1a2X42WAd2N4Nx/ZuWnLvYViFdevWPfWXf/PmTd037Ny5s3v37o0bN+7Xr9+ZM2dqrvvUoWe+oeUy+u9Kq9Vev3797bff9vX1dXJyCggI2Lp1q6Q/EqwM27vh2N5NSqWtca4CAAAoAxfZAQCgQAQ8AAAKRMADAKBABDwAAApEwAMAoEAEPAAACkTAAwCgQAQ8AAAKRMADAKBABDwAAApEwAMAoEAEPAAACkTAAwCgQAQ8AAAKRMADAKBABDwAAApEwAMAoEAEPAAACkTAAwCgQAQ8AAAKRMADAKBABDwAAApEwAMAoEAEPAAACkTAAwCgQAQ8AAAKRMADAKBABDzq69GjR+Xl5XJXAUAKbO8WhIBHbeLi4lq1alX98uHDh02aNFm+fLkQokWLFrt27Zo7d27z5s3z8vLkqxGAcbC9KwwBj9pERETk5OScOnVK9/LAgQPFxcWjRo3SvVy1atX58+fXr1/v7u4uX40AjIPtXWHUchcAs9atW7dWrVqlpaV169ZNCLFt27ZevXp5enrqRouKio4cOaJSqWStEYBxsL0rDJ/g8QzDhw//xz/+IYS4f/9+enr66NGjq4cGDx7M1g4oCdu7khDweIaIiIjz589fvHhx3759jx49GjFiRPUQR+oAhWF7VxIO0eMZAgMDmzdvnpaW9v333w8aNMjV1bV6qEEDdhABRWF7VxICHs/QoEGDYcOGbdmy5dKlS59+x0T29QAAAShJREFU+qnc5QAwIbZ3JWGPDM8WERHxr3/9S61WDxkyRO5aAJgW27ti8Akez/bqq686OzsPGzasUaNGctcCwLTY3hWDgMezXb9+vaSk5C9/+UvNhTdu3JCrHgCmw/auGAQ8alNZWVlWVpaQkODu7t6/f3+5ywFgQmzvCkPAozbZ2dlt2rRp0KBBamqqWs1fC6BkbO8Ko9JqtXLXAPNVUVFx/PhxX1/f5s2by10LANNie1cYAh4AAAWiTQ4AAAUi4AEAUCACHgAABSLgAQBQIAIeAAAFIuABAFAgAh4AAAUi4AEAUCACHgAABSLgAQBQIAIeAAAFIuABAFAgAh4AAAUi4AEAUCACHgAABSLgAQBQIAIeAAAFIuABAFAgAh4AAAUi4AEAUKD/D6qG8FaYVmA2AAAAAElFTkSuQmCC" alt />
-<p class="caption">Growing season soil water storage and transpiration of 50 simulations, with random variation of parameters ‘maxlai’ and ‘glmax’</p>
+<p class="caption">Growing season soil water storage and transpiration
+of 50 simulations, with random variation of parameters ‘maxlai’ and
+‘glmax’</p>
 </div>
-<p>We ran 50 simulations, all with the same climate, soil, and parameters except for <code>maxlai</code> and <code>glmax</code>, that where varied randomly. In the next vignette <a href="LWFBrook90R-4-Multisite-Runs.html">‘Multi-Site simulations’</a>, we will learn how to make use of multiple climate, soil, and parameter sets using the function <code>run_multisite_LWFB90()</code>, to simulate a set of different sites.</p>
+<p>We ran 50 simulations, all with the same climate, soil, and
+parameters except for <code>maxlai</code> and <code>glmax</code>, that
+where varied randomly. In the next vignette <a href="LWFBrook90R-4-Multisite-Runs.html">‘Multi-Site simulations’</a>,
+we will learn how to make use of multiple climate, soil, and parameter
+sets using the function <code>run_multisite_LWFB90()</code>, to simulate
+a set of different sites.</p>
 </div>
 
 

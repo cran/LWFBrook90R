@@ -34,7 +34,7 @@ msite_run1 <- run_multisite_LWFB90(
 ## -----------------------------------------------------------------------------
 str(msite_run1, max.level = 1)
 
-## ---- result='hide'-----------------------------------------------------------
+## ---- results='hide'----------------------------------------------------------
 tdir <- tempdir()
 fnames <- paste0(tdir, "/clim", 1:3, ".csv")
 lapply(fnames, function(x) {
