@@ -4,6 +4,7 @@ library(data.table)
 data("slb1_soil")
 data("slb1_meteo")
 opts <- set_optionsLWFB90(startdate = as.Date("2002-06-01"), enddate = as.Date("2002-06-02"))
+#opts <- set_optionsLWFB90(startdate = as.Date("2002-01-01"), enddate = as.Date("2003-12-31"))
 parms <- set_paramLWFB90()
 soil <- cbind(slb1_soil, hydpar_wessolek_tab(texture = slb1_soil$texture))
 outmat <- set_outputLWFB90()
@@ -159,6 +160,26 @@ test_that("precipitation input works",{
                                         as.Date("2013-07-28")),
                                 sum(prec)],
                sum(res$output$rfal+res$output$sfal) / 24)
+
+})
+
+
+test_that("water table input works",{
+  # from layer 16 there should be groundwater
+  res <- run_LWFB90(options_b90 = opts,
+                                param_b90 = set_paramLWFB90(water_table_depth = -1),
+                                climate = slb1_meteo,
+                                soil = soil)
+  expect_equal(res$layer_output[nl==16, unique(wetnes)], 1)
+  expect_true(res$layer_output[nl==15, mean(wetnes)] < 1)
+  expect_true(res$layer_output[nl==10, mean(wetnes)] < 1)
+
+  # groundwater shortly below lower boundary
+  res <- run_LWFB90(options_b90 = opts,
+                    param_b90 = set_paramLWFB90(water_table_depth = -2.2),
+                    climate = slb1_meteo,
+                    soil = soil)
+  expect_true(all(res$layer_output[nl==21, wetnes] > test_default$layer_output[nl == 21, wetnes]))
 
 })
 

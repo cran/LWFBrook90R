@@ -2,9 +2,9 @@
 #'
 #' Passes input data matrices to the Fortran model code and returns the results
 #'
-#' @param siteparam A [1,6] matrix with site level information: start year,
+#' @param siteparam A [1,9] matrix with site level information: start year,
 #'   start doy, latitude, initial snow, initial groundwater, precipitation
-#'   interval.
+#'   interval, a snow cover's  liquid water (SNOWLQ) and cold content (CC).
 #' @param climveg A matrix with 15 columns of climatic and vegetation data:
 #'   year, month, day, global radiation in MJ/(m² d), tmax (deg C), tmin (deg
 #'   C), vappres (kPa), wind (m/s), prec (mm), mesfl (mm), densef (-), stand
@@ -58,7 +58,7 @@ r_lwfbrook90 <- function(
   # Run the model
   out <- .Call(
     's_brook90_c',
-    siteparam = as.matrix(siteparam, ncol = 6, nrow = 1),
+    siteparam = as.matrix(siteparam, ncol = 8, nrow = 1),
     climveg = as.matrix(climveg, ncol = 15),
     param = as.vector(param),
     pdur = as.matrix( pdur, ncol = 12 ),
@@ -88,7 +88,7 @@ r_lwfbrook90 <- function(
                          'isvp','slvp','snvp','pint','ptran','pslvp','flow','seep',
                          'srfl','slfl','byfl','dsfl','gwfl','vrfln','safrac',
                          'stres','adef','awat','relawat','nits','balerr', 'slrad',
-                         'solnet', 'lngnet', 'aa', 'asubs'))
+                         'solnet', 'lngnet', 'aa', 'asubs', 'snowlq', 'cc'))
 
   # layer outputs
   out$layer_output <- data.table::rbindlist(
@@ -98,7 +98,7 @@ r_lwfbrook90 <- function(
 
   data.table::setnames(out$layer_output, names(out$layer_output)[-1],
                        c('yr','mo','da','doy','swati','theta','wetnes','psimi','infl',
-                         'byfl','tran','vrfl','dsfl','ntfl'))
+                         'byfl','tran','vrfl','dsfl','ntfl', 'relawati'))
 
   return(out)
 }
@@ -126,6 +126,8 @@ chk_errors <- function(){
       if (out$error_code == 7L) stop("Simulation terminated abnormally: 'water storage exceeds water capacity!'
                                         (rerun with verbose = TRUE  to see more information)")
       if (out$error_code[[1]] == 8L) stop("Simulation terminated abnormally due to undefined elements in input!'
+                                        (rerun with verbose = TRUE  to see more information)")
+      if (out$error_code[[1]] == 9L) stop("Simulation terminated abnormally: bad water table definition!'
                                         (rerun with verbose = TRUE  to see more information)")
 
     }

@@ -78,6 +78,7 @@
 #' awat \tab total available soil water in layers with roots between -6.18 kPa and \code{param_b90$psicr} \tab mm \cr
 #' balerr \tab error in water balance (daily value, output at the day's last precipitation interval) \tab mm \cr
 #' byfl \tab total bypass flow \tab mm/d \cr
+#' cc \tab cold content of snowpack (positive) \tab MJ m-2 \cr
 #' dsfl \tab downslope flow \tab mm/d \cr
 #' evap \tab evapotranspiration \tab mm/d \cr
 #' flow \tab total streamflow \tab mm/d \cr
@@ -109,6 +110,7 @@
 #' solnet \tab net solar radiation on slope over daytime \tab W/m2 \cr
 #' smlt \tab snowmelt \tab mm/d \cr
 #' snow \tab snowpack water equivalent \tab mm \cr
+#' snowlq \tab liquid water content of snow on the ground \tab mm \cr
 #' snvp \tab evaporation from snowpack \tab mm/d \cr
 #' srfl \tab source area flow \tab mm/d \cr
 #' stres \tab tran / ptran (daily value, output at the day's last precipitation interval) \tab - \cr
@@ -190,7 +192,8 @@ run_LWFB90 <- function(options_b90,
                                       leaffalldoy.fixed = param_b90$leaffalldoy,
                                       species = param_b90$budburst_species,
                                       est.prev = ifelse(length(climyears) <= 5,
-                                                        length(climyears) - 1, 5))
+                                                        length(climyears) - 1, 5),
+                                      check.data = FALSE)
   param_b90$budburstdoy <- budburst_leaffall$start
   param_b90$leaffalldoy <- budburst_leaffall$end
 
@@ -287,7 +290,8 @@ run_LWFB90 <- function(options_b90,
       siteparam = data.frame(simyears[1],
                              as.integer(format(options_b90$startdate, "%j")),
                              param_b90$coords_y, param_b90$snowini, param_b90$gwatini,
-                             options_b90$prec_interval),
+                             options_b90$prec_interval, param_b90$snowlqini,
+                             param_b90$snowccini, param_b90$water_table_depth),
       climveg = cbind(climate[, c("yr", "mo", "da","globrad","tmax","tmin",
                                   "vappres","windspeed","prec","mesfl")],
                       standprop_daily[, c("densef", "height", "lai", "sai", "age")]),

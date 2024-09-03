@@ -14,7 +14,6 @@
 !     xxxxMflow for month, mm
 !     xxxxYflow for year, mm
 
-integer, parameter :: ML = 1000, MPar= 10, MMat=20, Reset=1
 real(kind=c_double) :: B0              !,B1,B2,B3,B4,B5     ! buffer
 !real(kind=c_double) :: A0,A1           !,A2,A3,A4,A5     ! buffer
 real(kind=c_double) :: AA(2)           ! average available energy over daytime or nighttime, W/m2
@@ -31,6 +30,7 @@ real(kind=c_double) :: ATRANI(ML)      ! actual transp.rate from layer for dayti
 real(kind=c_double) :: ATRI(2,ML)      ! actual transp.rate from layer for daytime and night,mm/d
 real(kind=c_double) :: AWAT            ! available soil water in root zone, mm, output only
 real(kind=c_double) :: AWATFK          ! available soil water in root zone at field cap., mm, output only
+real(kind=c_double) :: AWATIFK(ML)        ! available soil water of layers at field cap., mm, output only
 ! real(kind=c_double) :: AWATM           ! average monthly AWAT
 real(kind=c_double) :: AWAT40          ! available soil water til 40 cm, mm, output only
 real(kind=c_double) :: BALERD          ! BALERM,,BALERY error in water balance. mm
@@ -107,6 +107,7 @@ real(kind=c_double) :: GSP             ! * fraction of discharge to seepage
 real(kind=c_double) :: GWAT            ! **** groundwater storage below soil layers, mm
 real(kind=c_double) :: GWFL            ! streamflow rate from groundwater, mm/d
 real(kind=c_double) :: GWFLP, GWFLD    ! , GWFLM, GWFLYgroundwater flow
+type(groundwater_variables) :: gwv ! groundwater variables (including groundwater_level, N_groundwater, ... (see md_typedefs.f95))
 double precision   HA(ML), HB(ML), HC(ML), HD(ML) ! Buffers for heat flow
 integer :: HEAT                 !  switch to include (1) or to exclude (0) soil heat flow
 real(kind=c_double) :: HeatCapNew(ML), HeatCapOld(ML) ! Volumetric heat capacity of layer [J m-3 K-1]
@@ -198,6 +199,7 @@ real(kind=c_double) :: RAA             ! Shuttleworth-Wallace atmosphere aerodyn
 real(kind=c_double) :: RAC             ! Shuttleworth-Wallace canopy aerodynamic resistance, s/m
 real(kind=c_double) :: RAS             ! Shuttleworth-Wallace ground aerodynamic resistance, s/m
 real(kind=c_double) :: RELAWAT         ! relative AWAT : AWAT/AWATFK
+real(kind=c_double) :: RELAWATI(ML)    ! relative AWAT : AWATI/AWATIFK
 real(kind=c_double) :: RELDEN(ML)      ! * relative values of root density per unit volume
 real(kind=c_double) :: RFAL            ! rainfall rate, mm/d
 real(kind=c_double) :: RFALD           !, RFALM, RFALY ! rainfall, mm

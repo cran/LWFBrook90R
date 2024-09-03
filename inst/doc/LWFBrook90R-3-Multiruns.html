@@ -439,9 +439,11 @@ parameters <code>budburstdoy</code> and <code>leaffalldoy</code>.</p>
 <p>and apply the function to the return, to see that our custom output
 function works:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output_function</span>(b90res, <span class="at">tolayer =</span> <span class="dv">15</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      yr swat_vp_mean tran_vp_sum</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2002     290.1533    202.9172</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2003     226.4391    305.4688</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Key: &lt;yr&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       yr swat_vp_mean tran_vp_sum</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;num&gt;        &lt;num&gt;       &lt;num&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1:  2002     290.1533    202.9172</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2:  2003     226.4391    305.4688</span></span></code></pre></div>
 </div>
 <div id="multi-run-simulations-with-run_multi_lwfb90" class="section level2">
 <h2>Multi-run simulations with <code>run_multi_LWFB90()</code></h2>
