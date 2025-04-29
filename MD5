@@ -1,6 +1,6 @@
-aa5933790d6e03d4855c7141cd2d0b4e *DESCRIPTION
+44c71aa6acc951d897b59da2dc6d7a9a *DESCRIPTION
 c0cde401980cce5a567cd6311d7b940a *NAMESPACE
-26bb06bfcb8b8d96900048c40a990d9b *NEWS.md
+1760a2ef2792be3c05b6222ffe0e04fb *NEWS.md
 6319fc052fbb7e04c6252ab5bada7be8 *R/LWFBrook90r-package.R
 3e80661e8bbb74b61b9187709d2c9e91 *R/MakeRoots.R
 bafdadcff8a9f0be497dd9ec9056c748 *R/MakeSeasLAI.R
@@ -21,10 +21,10 @@ bea555674b2ca3a958721c1b28526eed *R/msiterunLWFB90.R
 1632557e1fe474a55a6e4d77830d39b5 *R/r_lwfbrook90.R
 934e44b259702201d4b44817f68dda91 *R/replace_vec_elem.R
 7734890962cb9c84e99497a9df6c8c9c *R/richter_prec_corr.R
-c7ca76c93854305d9a85ea88246a0707 *R/runLWFB90.R
-d0b207143539de8abc1b963d28c30829 *R/setoptionsLWFB90.R
+5871abd5cf09f0cd8f16336b31f593ea *R/runLWFB90.R
+86abe9fd3d4ac56f3fb238d942287267 *R/setoptionsLWFB90.R
 68cc7a5b827c6ce6587742ae1069def0 *R/setoutput_LWFB90.R
-fa7369d550cf2c6216b3ad692b4ee007 *R/setparms_LWFB90.R
+8ed91a1f8b5c6257b70e8ac71e490897 *R/setparms_LWFB90.R
 226c285bdc4c4a2d8b483474e1127e27 *R/soil_to_param.R
 6cf12349a3472f93d5114f462ae70c1c *R/standprop_yrly_to_param.R
 429d9aab0cf54bf89b97390fd107b208 *R/sysdata.rda
@@ -62,7 +62,7 @@ a137d28be9f448f2c8280ed6368f045e *inst/examples/run_multisite_LWFB90-help.R
 10b300738b0ef0c5e80b5343d5ccc624 *man/calc_vegperiod.Rd
 d2cf2e2a77ba6b2420bcbcbf4b1fa5b7 *man/correct_prec.Rd
 5e8807340ceef495f21d73158e6bf400 *man/extract_layer_output.Rd
-c535fa2efa3ab0e03b91a6d07bdca94b *man/figures/README-unnamed-chunk-5-1.png
+2622e8bbaba8a215e0ad2d03cdebc16b *man/figures/README-unnamed-chunk-5-1.png
 18e00a6da2a4c7ab1a7e15ed837e06a1 *man/make_rootden.Rd
 0ddc7eb3065ab7341b5673ca0075a618 *man/make_seasLAI.Rd
 bdb8d259b2ec718b19079c71d2182bbd *man/make_standprop.Rd
@@ -74,7 +74,7 @@ a5cc9bf2b4a9dd56c060ad2bd50f1b01 *man/plant_coupmodel.Rd
 097616a3d1bb82b209d586f285730ec9 *man/ptfs.Rd
 5c2d418900450f5817b519fee8067546 *man/r_lwfbrook90.Rd
 318795e43838ccb855e173176db02982 *man/replace_vecelements.Rd
-e205835600d4e5e8ef44cbd93a358b92 *man/run_LWFB90.Rd
+103958381bd756001d89c6c065af3ca1 *man/run_LWFB90.Rd
 329734fccf99cc2b0c05925924d283de *man/run_multi_LWFB90.Rd
 7ac57399d4b42b5d80565638ae34c3c5 *man/run_multisite_LWFB90.Rd
 6a568c4868d8e374c2759802017877fe *man/set_optionsLWFB90.Rd
