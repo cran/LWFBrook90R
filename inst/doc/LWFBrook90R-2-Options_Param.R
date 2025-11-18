@@ -13,7 +13,7 @@ param_b90 <- set_paramLWFB90()
 
 ## -----------------------------------------------------------------------------
 LAI_b90 <-  make_seasLAI(method = options_b90$lai_method,
-                         year = 2003,
+                         years = 2003,
                          maxlai = param_b90$maxlai,
                          winlaifrac = param_b90$winlaifrac,
                          budburst_doy = param_b90$budburstdoy,
@@ -23,13 +23,13 @@ LAI_b90 <-  make_seasLAI(method = options_b90$lai_method,
 
 ## -----------------------------------------------------------------------------
 options_b90$lai_method <- "linear"
-param_b90$lai_doy <- c(1,110,117,135,175,220,250,290,365)
-param_b90$lai_frac <- c(0.1,0.1,0.5,0.7,1.2,1.2,1.0,0.1,0.1)
+param_b90$lai_doy_table <- data.frame(lai_doy = c(1,110,117,135,175,220,250,290,365),
+                                      lai_frac = c(0.1,0.1,0.5,0.7,1.2,1.2,1.0,0.1,0.1))
+
 LAI_linear <-  make_seasLAI(method = options_b90$lai_method,
-                            year = 2003,
+                            years = 2003,
                             maxlai = param_b90$maxlai,
-                            lai_doy = param_b90$lai_doy ,
-                            lai_frac = param_b90$lai_frac)
+                            lai_doy_table = param_b90$lai_doy_table)
 
 ## -----------------------------------------------------------------------------
 options_b90$lai_method <- "Coupmodel"
@@ -37,7 +37,7 @@ param_b90$shp_budburst <- 0.5
 param_b90$shp_leaffall <- 5
 param_b90$shp_optdoy <- 180
 LAI_coupmodel <-  make_seasLAI(method = options_b90$lai_method,
-                               year = 2003,
+                               years = 2003,
                                maxlai = param_b90$maxlai,
                                budburst_doy = param_b90$budburstdoy,
                                leaffall_doy = param_b90$leaffalldoy,
@@ -80,12 +80,14 @@ par(oldpar)
 ## ----echo = 1:6, results = 'hide',fig.height=5, fig.width=7, fig.cap = "Options and parameters affecting interannual variation of leaf area index."----
 years <- 2001:2003
 param_b90$maxlai <- c(4,6,5)
+param_b90$winlaifrac <- 0.2
 param_b90$shp_optdoy <- c(210,180,240)
 param_b90$shp_budburst <- c(3,1,0.3)
 param_b90$budburstdoy <- c(100,135,121) 
 lai_variation <- make_seasLAI(method = options_b90$lai_method,
-                              year = years,
+                              years = years,
                               maxlai = param_b90$maxlai,
+                              winlaifrac = param_b90$winlaifrac,
                               budburst_doy = param_b90$budburstdoy,
                               leaffall_doy = param_b90$leaffalldoy,
                               shp_budburst = param_b90$shp_budburst,
@@ -96,9 +98,9 @@ plot(seq.Date(as.Date("2001-01-01"), as.Date("2003-12-31"), by = "day"),
      lai_variation, col = "green", ylab = "lai [m²/m²]",
      type ="l", xlab = "", lwd = 2)
 arrows( x0 = as.Date(paste(param_b90$budburstdoy, years),format = "%j %Y"),
-        y0 = -1.0, y1 = -0.3, length = 0.15, code = 2, xpd =TRUE)
+        y0 = -1.0, y1 = 0, length = 0.15, code = 2, xpd =TRUE)
 text(x = as.Date(paste(param_b90$budburstdoy, years),format = "%j %Y"),
-     y = -1.3, paste("doy", param_b90$budburstdoy), xpd = TRUE)
+     y = -0.5, paste("doy", param_b90$budburstdoy), xpd = TRUE)
 par(oldpar)
 
 ## -----------------------------------------------------------------------------
@@ -170,7 +172,7 @@ options_b90$budburst_method <- "Menzel"
 options_b90$leaffall_method <- "vonWilpert"
 param_b90$budburst_species <- "Fagus sylvatica"
 
-#run LWF-Brook90 without simulation
+# execute without simulation
 standprop_daily <- run_LWFB90(options_b90 = options_b90,
                               param_b90 = param_b90,
                               climate = slb1_meteo,
